@@ -1,0 +1,57 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Employe index{% endblock %}
+
+{% block body %}
+
+
+   <div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">	
+
+    <h1>Employe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cin</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Img_employe</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.id }}</td>
+                <td>{{ employe.cin }}</td>
+                <td>{{ employe.nom }}</td>
+                <td>{{ employe.prenom }}</td>
+                <td><img src="{{ asset('B/media/' ~ employe.imgEmploye) }}?t={{ date().getTimestamp() }}" alt="Employe image"  width = "10%"></td>
+                <td>
+                    <a href="{{ path('app_employe_show', {'id': employe.id}) }}">show</a>
+                    <a href="{{ path('app_employe_edit', {'id': employe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_employe_new') }}">Create new</a>
+
+   							</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+
+  
+{% endblock %}
