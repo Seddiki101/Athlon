@@ -16,7 +16,7 @@ class SujetController extends AbstractController
     #[Route('/', name: 'app_sujet_index', methods: ['GET'])]
     public function index(SujetRepository $sujetRepository): Response
     {
-        return $this->render('sujet/index.html.twig', [
+        return $this->render('sujet/index2.html.twig', [
             'sujets' => $sujetRepository->findAll(),
         ]);
     }
@@ -41,9 +41,9 @@ class SujetController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_sujet_show', methods: ['GET'])]
-    public function show(Sujet $sujet): Response
+    public function show2(Sujet $sujet): Response
     {
-        return $this->render('sujet/show.html.twig', [
+        return $this->render('sujet/show2.html.twig', [
             'sujet' => $sujet,
         ]);
     }

@@ -16,26 +16,8 @@ class ArticleController extends AbstractController
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('article/index.html.twig', [
+        return $this->render('article/index2.html.twig', [
             'articles' => $articleRepository->findAll(),
-        ]);
-    }
-
-
-    #[Route('lista2', name: 'lista2', methods: ['GET'])]
-    public function pindex(ArticleRepository $articleRepository): Response
-    {
-        return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
-        ]);
-    }
-
-
-    #[Route('/lista', name: 'lista')]
-    public function ppindex(ArticleRepository $articleRepository)
-    {
-        return $this->render('article/index.html.twig', [
-            'controller_name' => 'ArticleController',
         ]);
     }
 
@@ -60,9 +42,9 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_article_show', methods: ['GET'])]
-    public function show(Article $article): Response
+    public function show2(Article $article): Response
     {
-        return $this->render('article/show.html.twig', [
+        return $this->render('article/show2.html.twig', [
             'article' => $article,
         ]);
     }

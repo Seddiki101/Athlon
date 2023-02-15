@@ -102,4 +102,16 @@ class Sujet
 
         return $this;
     }
+	
+	
+	
+	
+	
+	
+	public function __toString(): string
+	{
+   return ("Sujet ".$this.getNom() );
+	}
+	
+	
 }
