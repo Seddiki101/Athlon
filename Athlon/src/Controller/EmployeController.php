@@ -20,7 +20,16 @@ class EmployeController extends AbstractController
             'employes' => $employeRepository->findAll(),
         ]);
     }
-
+   
+   
+    #[Route('/prodlist', name: 'prod_list')]
+    public function list(EmployeRepository $repository){
+        $ctg=$repository->findAll();
+        return $this->render('employe/index.html.twig',['employes'=>$ctg]);
+    }
+ 
+   
+ 
     #[Route('/new', name: 'app_employe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EmployeRepository $employeRepository): Response
     {

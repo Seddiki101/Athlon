@@ -5,45 +5,6 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-<<<<<<< Updated upstream
-        {% block stylesheets %}
-
-            <!-- Favicons -->
-            <link href="img/favicon.png" rel="icon">
-            <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-
-            <!-- Google Fonts -->
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-
-            <link type="text/css" href="{{asset('/B/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-            <link type="text/css" href="{{asset('/B/bootstrap/css/bootstrap-responsive.min.css')}}" rel="stylesheet">
-            <link type="text/css" href="{{asset('/B/css/theme.css')}}" rel="stylesheet">
-            <link type="text/css" href="{{asset('/B/images/icons/css/font-awesome.css')}}" rel="stylesheet">
-            <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
-                  rel='stylesheet'>
-
-            <link href="{{asset('/B/css/style.css')}}" rel="stylesheet">
-			{{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            <!-- Libraries JS Files -->
-            <script src="{{asset('/B/libraries/jquery/jquery.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/jquery.easing/jquery.easing.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/php-email-form/validate.js')}}"></script>
-            <script src="{{asset('/B/libraries/waypoints/jquery.waypoints.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/counterup/counterup.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/owl.carousel/owl.carousel.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/isotope-layout/isotope.pkgd.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/venobox/venobox.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/aos/aos.js')}}"></script>
-
-            <!-- Template Main JS File -->
-            <script src="{{asset('/B/js/main.js')}}"></script>
-			{{ encore_entry_script_tags('app') }}
-=======
        
 	   {% block stylesheets %}
 	   
@@ -85,19 +46,11 @@
   <script src="js/main.js"></script>
 		
             {{ encore_entry_script_tags('app') }}
->>>>>>> Stashed changes
         {% endblock %}
     </head>
 	
 	
     <body>
-<<<<<<< Updated upstream
-	
-	{% block header %}
-	
-			<div>
-			<div class="navbar navbar-fixed-top">
-=======
 	        {% block header %}
 			
 			
@@ -106,7 +59,6 @@
 			
 			
 				<div class="navbar navbar-fixed-top">
->>>>>>> Stashed changes
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
@@ -117,12 +69,8 @@
 			  		Edmin
 			  	</a>
 
-<<<<<<< Updated upstream
-
-=======
 				<div class="nav-collapse collapse navbar-inverse-collapse">
 				
->>>>>>> Stashed changes
 
 					<form class="navbar-search pull-left input-append" action="#">
 						<input type="text" class="span3">
@@ -132,19 +80,12 @@
 					</form>
 				
 					<ul class="nav pull-right">
-<<<<<<< Updated upstream
-
-						<li class="nav-user dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="images/user.png" class="nav-avatar" />
-=======
 						
 						
 						
 						<li class="nav-user dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<img src="/B/media/user1.png" class="nav-avatar" />
->>>>>>> Stashed changes
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
@@ -160,17 +101,6 @@
 			</div>
 		</div><!-- /navbar-inner -->
 	</div><!-- /navbar -->
-<<<<<<< Updated upstream
-
-	
-	
-	
-	
-	        <div>
-		<div class="container">
-			<div class="row">
-				<div class="span3">
-=======
 			
 			
 			
@@ -180,96 +110,23 @@
 			
 			
 							<div class="span3">
->>>>>>> Stashed changes
 					<div class="sidebar">
 
 						<ul class="widget widget-menu unstyled">
                                 <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> Utilisateur </a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Reclamation </a></li>
-<<<<<<< Updated upstream
-                                <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>Article </a></li>
-                                <li><a href="form.html"><i class="menu-icon icon-paste"></i>Sujet </a></li>
-=======
                                 <li><a href="{{ path('app_article_index') }}"><i class="menu-icon icon-book"></i>Article </a></li>
                                 <li><a href="{{ path('app_sujet_index') }}"><i class="menu-icon icon-paste"></i>Sujet </a></li>
->>>>>>> Stashed changes
                                 <li><a href="table.html"><i class="menu-icon icon-table"></i>Produit </a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Exercice </a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Cour </a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Categorie </a></li>
-<<<<<<< Updated upstream
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Employee </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Conge </a></li>
-=======
                                 <li><a href="{{ path('app_employe_index') }}"><i class="menu-icon icon-bar-chart"></i>Employee </a></li>
                                 <li><a href="{{ path('app_conge_index') }}"><i class="menu-icon icon-bar-chart"></i>Conge </a></li>
->>>>>>> Stashed changes
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Commande </a></li>
                                 <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Livraison </a></li>								
                             </ul><!--/.widget-nav-->
 
-<<<<<<< Updated upstream
-
-					</div><!--/.sidebar-->
-				</div><!--/.span3-->
-
-
-
-			</div>
-		</div><!--/.container-->
-	</div><!--/.wrapper-->
-
-	
-	
-	
-	
-	
-	
-	
-	{% endblock %} <!-- /header -->
-	
-	
-	
-	
-	
-	
-	
-				{% block body %}
-			
-				{% endblock %}<!-- /body -->
-		
-		
-		
-		
-		
-
-
-
-
-	{% block footer %}
-	<div class="footer">
-		<div class="container">
-			<b class="copyright">&copy; 2014 Edmin - EGrappler.com </b> All rights reserved.
-		</div>
-	</div>
-	{% endblock %} <!-- /footer -->		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-    </body>
-=======
 						<ul class="widget widget-menu unstyled">
                                 <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> Buttons </a></li>
                                 <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>Typography </a></li>
@@ -332,5 +189,4 @@
     
 	</body>
 	
->>>>>>> Stashed changes
 </html>
