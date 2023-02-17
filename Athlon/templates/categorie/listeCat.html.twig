@@ -1,0 +1,56 @@
+{% extends 'baseB.html.twig' %}
+
+{% block title %}Categorie {% endblock %}
+
+{% block body %}
+
+<table class="table table-bordered">
+									<thead>
+										<th>Id</th>
+										<th>Nom</th>
+										<th>Image</th>
+                                        <th>Modifier</th>
+                                        <th>Supprimer</th>
+									</thead>
+									<tbody>
+                                    {% for i in Categorie %}
+
+										<tr>
+											<td>{{i.id}} </td>
+                                            <td>{{i.nom}}</td>
+                                              <td><img src="{{ asset('/uploads/produit/' ~ i.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "10%"></td>
+                                             <td>
+                                                    <a href="{{ path('updateCat', {id:i.ID}) }}">Update </a>
+                                                </td>
+                                                 <td>
+                                                    <a href="{{ path('deleteCat', {id:i.ID}) }}">Delete </a>
+                                                </td>
+											
+                                            
+                                             
+											
+										</tr>
+										
+									
+									
+									
+									 {% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						
+						
+					
+					
+
+
+
+
+
+						
+						
+				
+					{% endblock %}
+								

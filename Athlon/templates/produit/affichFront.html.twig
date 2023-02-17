@@ -1,0 +1,47 @@
+{% extends 'baseF.html.twig' %}
+
+{% block title %}Produit {% endblock %}
+
+{% block body %}
+<table class="table table-bordered">
+									<thead>
+										<th>Id</th>
+                                        <th>Nom</th>
+										<th>Brand</th>
+										<th>Description</th>
+										<th>Prix</th>
+                                       
+										<th>Image</th>
+                                        <th>Categorie_id</th>
+                                        
+									</thead>
+									<tbody>
+                                    {% for i in Produit  %}
+
+										<tr>
+											<td>{{i.id}} </td>
+                                            <td>{{i.nom}} </td>
+                                            <td>{{i.brand}}</td>
+                                             <td>{{i.description}}</td>
+                                             <td>{{i.prix}}</td>
+                                             <td><img src="{{ asset('/uploads/produit/' ~ i.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "10%"></td>
+                                             <td>{{i.Categories}}</td>
+                                             
+											
+										</tr>
+										
+									
+									
+									
+									 {% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						
+						
+					
+					
+
+{% endblock %}

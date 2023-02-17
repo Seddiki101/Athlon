@@ -1,0 +1,40 @@
+
+{% extends 'baseB.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+<div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    
+                    <p class="card-description"> Ajouter un produit </p>
+                    {{ form_start(formProduit , {'attr': {'novalidate':'novalidate'}} ) }}
+                    
+    
+                    <form class="forms-sample">
+					<div class="form-group">
+                        {{ form_row(formProduit.nom, {'label':'nom' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                      <div class="form-group">
+                      {{ form_row(formProduit.brand, {'label':'marque' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+						<div class="form-group">
+                        {{ form_row(formProduit.description, {'label':' description' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+						<div class="form-group">
+                        {{ form_row(formProduit.prix, {'label':'prix' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+						<div class="form-group">
+                        {{ form_row(formProduit.image, {'label':'image' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+					
+                        {{ form_row(formProduit.Categories, {'label':'categorie' ,'attr':{'placeholder': 'Type something here….', 'class':'form-control'}}) }}
+						</div>
+						
+                    
+					 
+                      <button type="submit" class="btn btn-primary mr-2" >Ajouter</button>
+                    
+                    </form>
+                      {{ form_end(formProduit) }}
+                    </div>
+                </div>
+            </div>
+            
+			  {%endblock%}
