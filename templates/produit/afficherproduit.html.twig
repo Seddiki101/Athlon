@@ -1,0 +1,135 @@
+{% extends 'baseB.html.twig' %}
+
+{% block title %}Produit {% endblock %}
+
+{% block body %}
+<style>
+		#cours-table {
+            background-color: #f2f2f2;
+            border-collapse: collapse;
+            border: 3px solid #002a80 !important;
+            font-family: Arial, sans-serif;
+            width: 100%;
+        }
+
+        #cours-table th, #cours-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 3px solid #004C99 !important;
+            border-right: 3px solid #004C99 !important;
+        }
+
+        #cours-table th {
+            background-color: #004C99 !important;
+            color: white;
+        }
+
+        #cours-table tr:last-child td {
+            border-bottom: none;
+        }
+    </style>							
+			  
+                            <!--/.module-->
+                            
+                            <div class="wrapper">
+    <div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span9">
+                <div class="content">
+                                    <h3> Nos produits </h3>
+                                
+                                
+                                <div class="module-body table" >
+                                    <table cellpadding="1" cellspacing="1" border="1" class="datatable-1 table table-bordered table-striped	 display" 
+                                      width = "50%">
+                                       <tbody>
+                                     
+                                            <tr>
+                                                <th>
+                                                Id
+                                                </th>
+                                               
+                                                <th>
+                                                Nom
+                                                </th>
+                                                 
+                                                <th>
+                                                   Marque
+                                                </th>
+                                                
+                                                <th>
+                                                    Description
+                                                </th>
+                                                
+                                                <th>
+                                                   Prix
+                                                </th>
+                                                
+                                                <th>
+                                                   Categorie
+                                                </th>
+                                                
+                                                <th>
+                                                   Image
+                                                </th>
+                                               
+                                               
+                                                <th>
+                                                  Modifier
+                                                </th>
+                                               
+                                                <th>
+                                                   supprimer
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in Produit  %}
+                                            <tr class="odd gradeX">
+                                            <td>{{i.id}} </td>
+                                                  <td>{{i.nom}} </td>
+                                                <td>{{i.brand}}</td>
+                                               <td>{{i.description}}</td>
+                                                <td class="center">
+                                                    {{i.prix}}
+                                                </td>
+                                                <td class="center">
+                                                    {{i.Categories}}
+                                                </td>
+                                                <td class="center">
+                                                 <img src="{{ asset('/uploads/produit/' ~ i.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "60%">
+                                                </td>
+                                                 <td>
+                                                 <a class="btn btn-success" href="{{ path('update', {id:i.ID}) }}">Update </a>
+                                                </td>
+                                                 <td>
+                                                    <a class="btn btn-danger" href="{{ path('delete', {id:i.ID}) }}">Delete </a>
+                                                </td>
+                                            </tr>
+                                           </div><!--/.content-->
+            </div><!--/.span9-->
+        </div>
+    </div><!--/.container-->
+</div><!--/.wrapper--> 
+
+                                        </tfoot>
+                                        
+									 {% endfor %}
+                                    </table>
+                                     <a href="{{ path('ProduitAdd') }}" class="btn btn-primary mr-2">Ajouter un produit</a>
+                          
+                                </div>
+                            </div>			
+						
+					
+					
+
+
+
+
+
+						
+				
+					{% endblock %}
+								

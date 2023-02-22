@@ -1,0 +1,40 @@
+{% extends 'baseF.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+ <!-- About Section Begin -->
+    <section class="home-about spad">
+        <div class="container">
+       <div class="row">
+              <div class="col-lg-6">
+                    <div class="about-text">
+                     <h1> <p class="short-details"> {{Produit.nom}}  </p> </h1>
+                        <p class="short-details"> Catégorie : {{Produit.Categories}}</p>
+                        <p class="short-details"> Marque : {{Produit.brand}}</p>
+                        <p class="long-details"> Description : {{Produit.description}}</p>
+                      <p class="short-details"> Prix : {{Produit.prix}}</p>
+                    </div>
+                     <a href="#" class="primary-btn">Acheter</a>
+                </div>
+             
+                <div class="col-lg-6">
+                    <div class="about-img">
+                         <img src="{{ asset('/uploads/produit/' ~ Produit.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "10%">
+                           
+                    </div>
+                </div>
+                    
+                      <a href="{{ path('app_front') }}"> <--Retourner à la liste des produits</a>
+            </div>
+      
+        </div>
+    </section>
+    <!-- About Section End -->
+    {% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+
