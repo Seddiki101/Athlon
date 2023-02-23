@@ -1,0 +1,42 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Exercices index{% endblock %}
+
+{% block body %}
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: -80px;
+            margin-right: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            color: white;
+        }
+    </style>
+    <section class="trainer-section spad">
+        <h1 style="color: white;">List Exercices</h1>
+
+
+        <div class="container-fluid">
+            <div class="row">
+                {% for exercice in exercices %}
+                    <div class="col-md-4">
+                        <div class="feature-item set-bg" >
+                            <td><img src="{{ asset('/media/' ~ exercice.getImageExercice()) }}?t={{ date().getTimestamp() }}" alt="cours image"  width="150" height="100"></td>
+
+                            <p style="color:#E43434"><br /> {{ exercice.nom }}</p>
+                            <a href="{{ path('app_exercices_details', {'id': exercice.id}) }}" class="btn btn-primary">View details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+

@@ -1,0 +1,92 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Cours index{% endblock %}
+
+{% block body %}
+    <style>
+    h1 {
+    text-align: center;
+    margin-top: -80px;
+    margin-right: 50px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 5rem;
+    color: white;
+    }
+    </style>
+<section class="trainer-section spad">
+    <h1>List Cours</h1>
+
+
+        <div class="container-fluid">
+            <div class="row">
+                {% for cour in cours %}
+                    <div class="col-md-4">
+                        <div class="feature-item set-bg" >
+                            <td><img src="{{ asset('/media/' ~ cour.getImageCours()) }}?t={{ date().getTimestamp() }}" alt="cours image"  width="150" height="100"></td>
+
+                            <p style="color:#E43434"><br /> {{ cour.nom }}</p>
+                            <a href="{{ path('app_ListFront_details', {'id': cour.id}) }}" class="btn btn-primary">View details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

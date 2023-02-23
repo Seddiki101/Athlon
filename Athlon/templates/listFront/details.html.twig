@@ -1,0 +1,127 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+    <style>
+        table {
+            margin-top: 50px;
+
+        }
+        h1 {
+            text-align: center;
+            margin-top: -80px;
+            margin-right: 80px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            color: white;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 40px;
+        }
+
+        table {
+            margin-bottom: 80px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 60px;
+
+        }
+        .btn2 {
+            display: inline-block;
+            padding: 9px 80px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            margin: 4px 30px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Button hover style */
+        .btn2:hover {
+            background-color: #0062cc;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button active style */
+        .btn2:active {
+            background-color: #005cbf;
+            box-shadow: none;
+        }
+
+        /* Button disabled style */
+        .btn2:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+
+
+
+
+
+
+
+
+    <section class="trainer-section spad">
+    <div class="wrapper">
+        <div class="container">
+
+                <div class="span9">
+                    <div class="content">
+                        <h1>Cour</h1>
+                        <div class="centered-text">
+
+
+                        <table class="table">
+                            <tbody>
+
+                            <tr>
+                                <th style="color: white">Nom</th>
+                                <td style="color: white">{{ cour.Nom }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: white">Description_cours</th>
+                                <td style="color: white">{{ cour.descriptionCours }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: white">Niveau_cours</th>
+                                <td style="color: white">{{ cour.NiveauCours }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: white">Capacity</th>
+                                <td style="color: white">{{ cour.capacity }}</td>
+                            </tr>
+                            <tr>
+                                <th style="color: white">Duree_cours</th>
+                                <td style="color: white">{{ cour.dureeCours }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                            <div class="btn-container">
+                        <a href="{{ path('list_cours') }}"><button class="btn2">Back</button></a></a>
+                            </div>
+
+
+                    </div><!--/.content-->
+                </div><!--/.span9-->
+            </div>
+        </div><!--/.container-->
+    </div><!--/.wrapper-->
+</section>
+{% endblock %}

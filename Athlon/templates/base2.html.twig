@@ -1,180 +1,252 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
+<html lang="zxx">
 
-            <!-- Favicons -->
-            <link href="img/favicon.png" rel="icon">
-            <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Activitar | Template {% endblock %} </title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <!-- Google Font -->
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap')}}" rel="stylesheet">
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap')}}" rel="stylesheet">
 
-            <!-- Google Fonts -->
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ asset('/F/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/style.css') }}" type="text/css">
+</head>
 
-
-            <link type="text/css" href="{{asset('/B/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-            <link type="text/css" href="{{asset('/B/bootstrap/css/bootstrap-responsive.min.css')}}" rel="stylesheet">
-            <link type="text/css" href="{{asset('/B/css/theme.css')}}" rel="stylesheet">
-            <link type="text/css" href="{{asset('/B/images/icons/css/font-awesome.css')}}" rel="stylesheet">
-            <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600'
-                  rel='stylesheet'>
-
-            <link href="{{asset('/B/css/style.css')}}" rel="stylesheet">
-			{{ encore_entry_link_tags('app') }}
-        {% endblock %}
-
-        {% block javascripts %}
-            <!-- Libraries JS Files -->
-            <script src="{{asset('/B/libraries/jquery/jquery.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/jquery.easing/jquery.easing.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/php-email-form/validate.js')}}"></script>
-            <script src="{{asset('/B/libraries/waypoints/jquery.waypoints.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/counterup/counterup.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/owl.carousel/owl.carousel.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/isotope-layout/isotope.pkgd.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/venobox/venobox.min.js')}}"></script>
-            <script src="{{asset('/B/libraries/aos/aos.js')}}"></script>
-
-            <!-- Template Main JS File -->
-            <script src="{{asset('/B/js/main.js')}}"></script>
-			{{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-	
-	
-    <body>
-	
-	{% block header %}
-	
-			<div>
-			<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-inverse-collapse">
-					<i class="icon-reorder shaded"></i>
-				</a>
-
-			  	<a class="brand" href="index.html">
-			  		Edmin
-			  	</a>
+<body>
 
 
+<!-- Header Section Begin -->
+<header class="header-section header-normal">
+    <div class="container-fluid">
+        <div class="logo">
+            <a href="./index.html">
+                <img src="{{asset('/F/img/logo.png')}}" alt="">
+            </a>
+        </div>
+        <div class="top-social">
+            <a href="#">  <i class="fa fa-user"></i> Sign up/Sign in  </a>
+        </div>
+        <div class="container">
+            <div class="nav-menu">
+                <nav class="mainmenu mobile-menu">
+                    <ul>
+                        <li><a href="./index.html">Home</a></li>
+                        <li><a href="./schedule.html">SHOP</a></li>
+                        <li><a href="./schedule.html">Schedule</a></li>
+                        <li><a href="./gallery.html">Gallery</a></li>
+                        <li><a href="./blog.html">Blog</a>
+                            <ul class="dropdown">
+                                <li><a href="./about-us.html">About Us</a></li>
+                                <li><a href="./blog-single.html">Blog Details</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./contact.html">Contacts</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>
+<!-- Header End -->
 
-					<form class="navbar-search pull-left input-append" action="#">
-						<input type="text" class="span3">
-						<button class="btn" type="button">
-							<i class="icon-search"></i>
-						</button>
-					</form>
-				
-					<ul class="nav pull-right">
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg spad" data-setbg="{{asset('/F/img/about-bread.jpg')}}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Bienvenue à nos Cours</h2>
+                    <div class="breadcrumb-controls">
 
-						<li class="nav-user dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<img src="images/user.png" class="nav-avatar" />
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Your Profile</a></li>
-								<li><a href="#">Edit Profile</a></li>
-								<li><a href="#">Account Settings</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Logout</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div><!-- /.nav-collapse -->
-			</div>
-		</div><!-- /navbar-inner -->
-	</div><!-- /navbar -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb End -->
+{% block body %}
 
-	
-	
-	
-	
-	        <div>
-		<div class="container">
-			<div class="row">
-				<div class="span3">
-					<div class="sidebar">
-
-						<ul class="widget widget-menu unstyled">
-                                <li><a href="ui-button-icon.html"><i class="menu-icon icon-bold"></i> Utilisateur </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Reclamation </a></li>
-                                <li><a href="ui-typography.html"><i class="menu-icon icon-book"></i>Article </a></li>
-                                <li><a href="form.html"><i class="menu-icon icon-paste"></i>Sujet </a></li>
-                                <li><a href="table.html"><i class="menu-icon icon-table"></i>Produit </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Exercice </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Cour </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Categorie </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Employee </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Conge </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Commande </a></li>
-                                <li><a href="charts.html"><i class="menu-icon icon-bar-chart"></i>Livraison </a></li>								
-                            </ul><!--/.widget-nav-->
-
-
-					</div><!--/.sidebar-->
-				</div><!--/.span3-->
-
-
-
-			</div>
-		</div><!--/.container-->
-	</div><!--/.wrapper-->
-
-	
-	
-	
-	
-	
-	
-	
-	{% endblock %} <!-- /header -->
-	
-	
-	
-	
-	
-	
-	
-				{% block body %}
-			
-				{% endblock %}<!-- /body -->
-		
-		
-		
-		
-		
+    <!-- Trainer Section Begin -->
+    <section class="trainer-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>OUR Trainer</h2>
+                        <p>Our Crossfit experts can help you discover new training techniques.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="trainer-item">
+                        <div class="ti-pic">
+                            <img src="{{asset('/F/img/trainer/trainer-1.jpg')}}" alt="">
+                            <div class="ti-links">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            <div class="trainer-text">
+                                <h5>Becky Taylor <span>- Gymer</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="trainer-item">
+                        <div class="ti-pic">
+                            <img src="{{asset('/F/img/trainer/trainer-2.jpg')}}" alt="">
+                            <div class="ti-links">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            <div class="trainer-text">
+                                <h5>Noah Leonard <span>- Trainer</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <!-- Trainer Section End -->
+{% endblock %}
+<!-- Cta Section Begin -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cta-text">
+                    <h3>GeT Started Today</h3>
+                    <p>New student special! $30 unlimited Gym for the first week anh 50% of our member!</p>
+                </div>
+                <a href="#" class="primary-btn cta-btn">book now</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Cta Section End -->
 
+<!-- Footer Section Begin -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="footer-logo-item">
+                    <div class="f-logo">
+                        <a href="#"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <p>Despite growth of the Internet over the past seven years, the use of toll-free phone numbers
+                        in television advertising continues.</p>
+                    <div class="social-links">
+                        <h6>Follow us</h6>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+                <div class="footer-widget">
+                    <h5>Our Blog</h5>
+                    <div class="footer-blog">
+                        <a href="#" class="fb-item">
+                            <h6>Most people who work</h6>
+                            <span class="blog-time"><i class="fa fa-clock-o"></i> Jan 02, 2019</span>
+                        </a>
+                        <a href="#" class="fb-item">
+                            <h6>Freelance Design Tricks How </h6>
+                            <span class="blog-time"><i class="fa fa-clock-o"></i> Jan 02, 2019</span>
+                        </a>
+                        <a href="#" class="fb-item">
+                            <h6>have a computer at home have had </h6>
+                            <span class="blog-time"><i class="fa fa-clock-o"></i> Jan 02, 2019</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="footer-widget">
+                    <h5>Program</h5>
+                    <ul class="workout-program">
+                        <li><a href="#">Bodybuilding</a></li>
+                        <li><a href="#">Running</a></li>
+                        <li><a href="#">Streching</a></li>
+                        <li><a href="#">Weight Loss</a></li>
+                        <li><a href="#">Gym Fitness</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="footer-widget">
+                    <h5>Get Info</h5>
+                    <ul class="footer-info">
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <span>Phone:</span>
+                            (12) 345 6789
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope-o"></i>
+                            <span>Email:</span>
+                            Colorlib.info@gmail.com
+                        </li>
+                        <li>
+                            <i class="fa fa-map-marker"></i>
+                            <span>Address</span>
+                            Iris Watson, Box 283 8562, NY
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="ct-inside"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
 
-	{% block footer %}
-	<div class="footer">
-		<div class="container">
-			<b class="copyright">&copy; 2014 Edmin - EGrappler.com </b> All rights reserved.
-		</div>
-	</div>
-	{% endblock %} <!-- /footer -->		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+<!-- Js Plugins -->
+<script src="{{ asset('/F/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('/F/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/F/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('/F/js/mixitup.min.js') }}"></script>
+<script src="{{ asset('/F/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('/F/js/jquery.slicknav.js') }}"></script>
+<script src="{{ asset('/F/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('/F/js/masonry.pkgd.min.js') }}"></script>
+<script src="{{ asset('/F/js/main.js') }}"></script>
+</body>
 
-    </body>
 </html>

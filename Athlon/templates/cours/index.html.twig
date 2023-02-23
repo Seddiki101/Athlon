@@ -1,0 +1,110 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button1 {background-color: #6BB675;} /* Green */
+        .button2 {background-color: #6BB675;} /* Blue */
+        .button3 {background-color:#6BB675;} /*mauve*/
+
+        #cours-table {
+            background-color: #f2f2f2;
+            border-collapse: collapse;
+            border: 3px solid #6BB675 !important;
+            font-family: Arial, sans-serif;
+            width: 100%;
+        }
+
+        #cours-table th, #cours-table td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 3px solid #6BB675 !important;
+            border-right: 3px solid #6BB675 !important;
+        }
+
+        #cours-table th {
+            background-color: #6BB675 !important;
+            color: white;
+        }
+
+        #cours-table tr:last-child td {
+            border-bottom: none;
+        }
+        table th, table td {
+            font-family: Arial, sans-serif; /* changer la police */
+            font-weight: bold; /* rendre gras */
+        }
+    </style>
+
+    <div class="wrapper">
+        <div class="container">
+            <div class="row">
+
+
+
+                <div class="span9">
+                    <div><table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped     display"
+                                width="100%">>
+                        <table class="table" id="cours-table">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Description_cours</th>
+                                <th>Niveau_cours</th>
+                                <th>Capacity</th>
+                                <th>Duree_cours</th>
+                                <th>actions</th>
+                                <th>image</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for cour in cours %}
+                                <tr>
+                                    <td>{{ cour.id }}</td>
+                                    <td>{{ cour.Nom }}</td>
+                                    <td>{{ cour.descriptionCours }}</td>
+                                    <td>{{ cour.NiveauCours }}</td>
+                                    <td>{{ cour.capacity }}</td>
+                                    <td>{{ cour.dureeCours }}</td>
+                                <td><img src="{{ asset('/media/' ~ cour.getImageCours()) }}?t={{ date().getTimestamp() }}" alt="cours image"  width="50" height="50"></td>
+
+                                    <td>
+                                        <a href="{{ path('app_cours_edit', {'id': cour.id}) }}"><button class="button button2">EDIT</button></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="13">no records found</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+
+                        </table>
+
+                        <a href="{{ path('app_cours_new') }}"><button class="button button3">NEW</button></a>
+
+
+                    </div><!--/.content-->
+                </div><!--/.span9-->
+            </div>
+        </div><!--/.container-->
+    </div><!--/.wrapper-->
+
+
+
+{% endblock %}
