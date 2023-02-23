@@ -4,6 +4,13 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Form\ProduitType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Psr\Log\LoggerInterface;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -14,13 +21,29 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $titre = null;
+#[Assert\NotBlank(message:"Le titre  est obligatoire")]
+#[Assert\Length(
+    max :15,
+    maxMessage : "Le titre ne doit pas dépasser {{ limit }} caractères")]
+#[Assert\Regex(
+    pattern: "/^[a-zA-Z0-9_ ]+$/",
+    message: "Le titre ne doit contenir que des lettres, des chiffres, des espaces ou des underscores")]
+    #[Assert\Length(
+        max :15,
+        maxMessage : "Le nom de machine ne doit pas dépasser {{ limit }} caractères")]
+    
+private $titre;
+
 
     #[ORM\Column(length: 255)]
     private ?string $auteur = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $descripton = null;
+    #[Assert\NotBlank(message:"La description de l'exercice est obligatoire")]
+    #[Assert\Length(
+        max :15,
+        maxMessage : "La description d exercice ne doit pas dépasser {{ limit }} caractères")]
+    private string $descripton ;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imgArticle = null;
@@ -104,3 +127,6 @@ class Article
 	
 	
 }
+
+
+

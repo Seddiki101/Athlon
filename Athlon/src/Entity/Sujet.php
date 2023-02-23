@@ -19,7 +19,12 @@ class Sujet
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $descr = null;
+    #[Assert\NotBlank(message:"La description de l'exercice est obligatoire")]
+    #[Assert\Length(
+        max :15,
+        maxMessage : "La description d exercice ne doit pas dépasser {{ limit }} caractères")]
+    private string $descr ;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imgSujet = null;

@@ -6,6 +6,8 @@ use App\Entity\Sujet;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\File;
 
 class SujetType extends AbstractType
 {
@@ -14,7 +16,17 @@ class SujetType extends AbstractType
         $builder
             ->add('nom')
             ->add('descr')
-            ->add('imgSujet')
+            ->add('imgSujet',FileType::class,[
+                'label' => 'image',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2Mi',
+                        'mimeTypesMessage' => 'Please upload a valid image file',
+                    ])
+                ],
+            ])
         ;
     }
 

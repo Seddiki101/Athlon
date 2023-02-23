@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <th>ImgArticle</th>
-                <td>{{ article.imgArticle }}</td>
+               <td><img src="{{ asset('B/media/' ~ article.imgArticle) }}?t={{ date().getTimestamp() }}" alt="Sujet image"  width = "30%">  </td>
             </tr>
         </tbody>
     </table>
