@@ -1,0 +1,36 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+    <a href="{{ path('app_commande_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>user</th>
+            <th>date</th>
+            <th>statue</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.user }}</td>
+                <td>{{ commande.date  | date }}</td>
+                <td>{{ commande.statue }}</td>
+                <td>
+                    <form method="post" action="{{ path('app_commande_delete', {'idC': commande.idC}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande.idC) }}">
+                        <button class="btn btn-danger">delete</button>
+                    </form>
+                    <a class="btn btn-success" href="{{ path('app_commande_edit', {'idC': commande.idC}) }}">edit</a>
+                    <a class="btn btn-warning"
+                       href="{{ path('app_commande_item_index_commande', {'idC': commande.idC}) }}">items</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

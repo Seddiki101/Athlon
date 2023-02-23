@@ -89,7 +89,7 @@
         ]
     },
     "symfony/flex": {
-        "version": "2.2",
+        "version": "1.19",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -132,7 +132,7 @@
         ]
     },
     "symfony/maker-bundle": {
-        "version": "1.48",
+        "version": "1.43",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -278,9 +278,6 @@
         "files": [
             "./config/packages/messenger.yaml"
         ]
-    },
-    "symfonycasts/verify-email-bundle": {
-        "version": "v1.13.0"
     },
     "twig/extra-bundle": {
         "version": "v3.5.1"

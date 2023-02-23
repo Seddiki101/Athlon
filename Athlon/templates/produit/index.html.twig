@@ -1,0 +1,34 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+
+    <div class="row gallery-filter">
+
+
+        {% for c in produits  %}
+        <div class="col-4"  >
+            <div class="gallery-item">
+                <img src="{{ asset('assets/img/about-bread.jpg') }}" alt="">
+                <div class="gi-hover-warp">
+                    <div class="gi-hover">
+
+                        <a type="button" class="btn btn-danger" href="{{path('cart_add',{id:c.idP})}}">++</a>
+                        <h6>{{ c.brand }}</h6>
+                    </div>
+                </div>
+
+
+            </div>
+        </div  >
+
+        {% endfor %}
+
+
+
+
+    </div>
+
+{% endblock %}
