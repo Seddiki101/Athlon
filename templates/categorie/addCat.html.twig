@@ -4,11 +4,13 @@
 {% block title %}Categorie{% endblock %}
 
 {% block body %}
-<div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    
-                    <p class="card-description">  Ajouter une categorie  </p>
+<div class="span9">
+<div class="content">
+
+						<div class="module">
+							<div class="module-head">
+								<h3>Ajouter une catégorie</h3>
+							</div>
                     {{ form_start(formCategorie , {'attr': {'novalidate':'novalidate'}} ) }}
                     <form class="forms-sample">
 					<div class="form-group">
@@ -27,5 +29,6 @@
               
                     </div>
                 </div>
+                 {{ form_end(formCategorie) }}
             </div>
 			  {%endblock%}

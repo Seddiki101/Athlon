@@ -4,13 +4,14 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-<div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    
-                   </br> <p class="card-description"> <h3> Ajouter un produit </h3> </p>
-                    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
-                    {{ form_start(formProduit , {'attr': {'novalidate':'novalidate'} }) }}
+<div class="span9">
+					<div class="content">
+
+						<div class="module">
+							<div class="module-head">
+								<h3>Ajouter un produit</h3>
+							</div>
+                    {{ form_start(formProduit , {'attr': {'novalidate':'novalidate'}},{'attr': {'class': 'form-container'}} ) }}
                     
 
                     
@@ -18,6 +19,7 @@
                     <form class="forms-sample">
                     <div
 					<div class="form-group">
+                    
                         {{ form_row(formProduit.nom, {'label':'Nom :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
                       <div class="form-group">
                       {{ form_row(formProduit.brand, {'label':'Marque :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>

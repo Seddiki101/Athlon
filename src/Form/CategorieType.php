@@ -17,25 +17,15 @@ class CategorieType extends AbstractType
         $builder
             ->add('nom')
             ->add('image', FileType::class, [
-                'label' => 'image de produit (Image file)',
-
-                // unmapped means that this field is not associated to any entity property
+                'label' => 'image',
                 'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
                 'required' => false,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
-                           //'image/jpg',
                             'image/png',
-                            //'image/gif',
-                         ],
-                         'mimeTypesMessage' => 'Veuillez télécharger une image valide',
+                           ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
                     ])
                 ],
             ])

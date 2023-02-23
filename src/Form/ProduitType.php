@@ -23,7 +23,6 @@ class ProduitType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'image de produit (Image file)',
 
-                // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
 
                 // make it optional so you don't have to re-upload the PDF file
@@ -35,11 +34,10 @@ class ProduitType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
-                           //'image/jpg',
                             'image/png',
-                            'image/gif',
-                         ],
-                         'mimeTypesMessage' => 'Veuillez télécharger une image valide',
+                           // 'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
                     ])
                 ],
             ])
