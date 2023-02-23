@@ -83,7 +83,8 @@ class CategorieController extends AbstractController
         $Categorie=new Categorie() ;
         $form=$this->createForm(CategorieType::class,$Categorie); 
         $form->handleRequest($request);
-        if( $form->isSubmitted() )  {
+        if( $form->isSubmitted()  )  {
+
             $brochureFile = $form->get('image')->getData();
 
             // this condition is needed because the 'brochure' field is not required
@@ -97,7 +98,7 @@ class CategorieController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $brochureFile->move(
-                        $this->getParameter('produit_directory'),
+                        $this->getParameter('categorie_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -127,7 +128,7 @@ class CategorieController extends AbstractController
         $form = $this->createForm(CategorieType::class, $Categorie);
         $form->add('update', SubmitType::class) ;
         $form->handleRequest($request);
-        if ($form->isSubmitted())
+        if ($form->isSubmitted() )
         {
 
             $brochureFile = $form->get('image')->getData();
@@ -143,7 +144,7 @@ class CategorieController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $brochureFile->move(
-                        $this->getParameter('produit_directory'),
+                        $this->getParameter('categorie_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {

@@ -35,7 +35,7 @@ class ProduitType extends AbstractType
                 'constraints' => [
                     new File([
                         'mimeTypes' => [
-                           // 'image/jpg',
+                           //'image/jpg',
                             'image/png',
                             'image/gif',
                          ],

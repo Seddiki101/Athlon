@@ -98,7 +98,7 @@
                                                     {{i.Categories}}
                                                 </td>
                                                 <td class="center">
-                                                 <img src="{{ asset('/uploads/produit/' ~ i.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "60%">
+                                                 <img src="{{ asset('/uploads/produit/' ~ i.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "100%">
                                                 </td>
                                                  <td>
                                                  <a class="btn btn-success" href="{{ path('update', {id:i.ID}) }}">Update </a>

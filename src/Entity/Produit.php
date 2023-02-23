@@ -20,7 +20,7 @@ class Produit
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"veuillez remplir le champs")]
-    #[Assert\Length(min:7,max:100, minMessage:"Doit etre > 7.", maxMessage:"Doit etre <=100")]
+    #[Assert\Length(min:7,max:100, minMessage:"La descreption doit etre > 7.", maxMessage:"Doit etre <=100")]
     private ?string $description = null;
 
 
@@ -34,7 +34,7 @@ class Produit
     #[Assert\Range(
           min : 0,
          max : 99999999.99,
-         notInRangeMessage : "Le prix doit avoir deux décimales maximum."
+         
     )]
     private ?float $prix = null;
 
@@ -46,7 +46,7 @@ class Produit
     #[Assert\Length(min:3, minMessage:"Votre nom inferieure a 3 caractères.")]
     #[Assert\Regex(
         pattern:"/^[^0-9]+$/",
-        message:"Le nom ne doit pas contenir de chiffres"
+        message:"Le nom ne doit pas contenir des chiffres"
     )]
     
     private ?string $nom = null;

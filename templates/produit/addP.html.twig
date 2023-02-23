@@ -8,31 +8,36 @@
                 <div class="card">
                   <div class="card-body">
                     
-                    <p class="card-description"> Ajouter un produit </p>
-                    {{ form_start(formProduit , {'attr': {'novalidate':'novalidate'}} ) }}
+                   </br> <p class="card-description"> <h3> Ajouter un produit </h3> </p>
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+                    {{ form_start(formProduit , {'attr': {'novalidate':'novalidate'} }) }}
+                    
+
                     
     
                     <form class="forms-sample">
+                    <div
 					<div class="form-group">
-                        {{ form_row(formProduit.nom, {'label':'nom' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                        {{ form_row(formProduit.nom, {'label':'Nom :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
                       <div class="form-group">
-                      {{ form_row(formProduit.brand, {'label':'marque' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                      {{ form_row(formProduit.brand, {'label':'Marque :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
 						<div class="form-group">
-                        {{ form_row(formProduit.description, {'label':' description' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                        {{ form_row(formProduit.description, {'label':' Description :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
 						<div class="form-group">
-                        {{ form_row(formProduit.prix, {'label':'prix' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                        {{ form_row(formProduit.prix, {'label':'Prix :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
 						<div class="form-group">
-                        {{ form_row(formProduit.image, {'label':'image' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                        {{ form_row(formProduit.image, {'label':'Image :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
 					
-                        {{ form_row(formProduit.Categories, {'label':'categorie' ,'attr':{'placeholder': 'Type something here….', 'class':'form-control'}}) }}
-						</div>
+                        {{ form_row(formProduit.Categories, {'label':'Categorie :' ,'attr':{'placeholder': 'Type something here….', 'class':'form-control'}}) }}
+						
 						
                     
 					 
                       <button type="submit" class="btn btn-primary mr-2" >Ajouter</button> <span>  <a href="{{ path('afficher') }}" class="btn btn-primary mr-2">Annuler</a>
-                      
+                      </div>
+                       </div>
                       {{ form_end(formProduit) }}
-                      
+                      </div>
                     </div>
                 </div>
             </div>

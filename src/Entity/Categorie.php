@@ -19,11 +19,15 @@ class Categorie
     
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"veuillez remplir ce champs")]
+    #[Assert\Length(min:3, minMessage:"Votre nom inferieure a 3 caractères.")]
+    #[Assert\Regex(
+        pattern:"/^[^0-9]+$/",
+        message:"Le nom ne doit pas contenir des chiffres"
+    )]
     private ?string $nom = null;
 
     
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"veuillez remplir ce champs")]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'Categories', targetEntity: Produit::class)]

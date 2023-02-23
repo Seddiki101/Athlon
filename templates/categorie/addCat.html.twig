@@ -8,14 +8,14 @@
                 <div class="card">
                   <div class="card-body">
                     
-                    <p class="card-description"> Ajouter une categorie </p>
+                    <p class="card-description">  Ajouter une categorie  </p>
                     {{ form_start(formCategorie , {'attr': {'novalidate':'novalidate'}} ) }}
                     <form class="forms-sample">
 					<div class="form-group">
-                        {{ form_row(formCategorie.nom, {'label':'nom' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                        {{ form_row(formCategorie.nom, {'label':'Nom :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
                      
 						<div class="form-group">
-                        {{ form_row(formCategorie.image, {'label':'image' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                        {{ form_row(formCategorie.image, {'label':'Image :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
 					
 						
                       
