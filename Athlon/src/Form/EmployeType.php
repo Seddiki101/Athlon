@@ -8,13 +8,30 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Positive;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+
+
+
+
 
 class EmployeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cin')
+        ->add('cin', NumberType::class, array(
+            'label' => 'Numéro :',
+            'constraints' => array(
+                new Positive(array(
+                    'message' => 'Le numéro doit être positif.'
+                ))
+            )
+        ))
             ->add('nom')
             ->add('prenom')
             ->add('img_employe',FileType::class,[
@@ -28,6 +45,12 @@ class EmployeType extends AbstractType
                     ])
                 ],
             ])
+
+
+
+           
+            
+            
 
         ;
     }

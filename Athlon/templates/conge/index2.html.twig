@@ -6,20 +6,51 @@
 
     
 <style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
 .button {
   border: none;
   color: white;
-  padding: 15px 20px;
+  padding: 6px 8px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  margin: 4px 2px;
-  cursor: progress;
+  margin: 2px 1px;
+  cursor: pointer;
+  background-color: #008CBA;
 }
 
-.button1 {background-color: #4CAF50;} /* Green */
-.button2 {background-color: #008CBA;} /* Blue */
+.button1 {
+  background-color: #4CAF50;
+}
+
+.button2 {
+  background-color: #008CBA;
+}
+
+ /* Blue */
 .button3 {background-color: #008CBA;} /* blue */
 </style>
 	<div class="wrapper">
@@ -34,8 +65,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>DateD</th>
-                <th>DateF</th>
+                <th>Nom et Prenom</th>
+                <th>Date Debut</th>
+                <th>Date Fin</th>
                 <th>Type</th>
                 <th>Actions</th>
             </tr>
@@ -44,11 +76,12 @@
         {% for conge in conges %}
             <tr>
                 <td>{{ conge.id }}</td>
+                 <td> <p>Employee: {{ conge.employe.nom }}  {{ conge.employe.prenom }}</p> </td>
                 <td>{{ conge.dateD ? conge.dateD|date('Y-m-d') : '' }}</td>
                 <td>{{ conge.dateF ? conge.dateF|date('Y-m-d') : '' }}</td>
                 <td>{{ conge.type }}</td>
                 <td>
-                    <a href="{{ path('app_conge_show', {'id': conge.id}) }}"><button class="button button1">Afficher ou Supprimer</button></a>
+                    <a href="{{ path('app_conge_show', {'id': conge.id}) }}"><button class="button button1">Afficher</button></a>
                     <a href="{{ path('app_conge_edit', {'id': conge.id}) }}"><button class="button button2">Modifier</button></a>
                 </td>
             </tr>

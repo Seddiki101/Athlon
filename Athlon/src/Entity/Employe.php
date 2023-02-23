@@ -17,14 +17,19 @@ class Employe
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"CIN ne doit pas être vide")]
     private ?int $cin = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Nom ne doit pas être vide")]
     #[Assert\Length(min:3, max:255, minMessage:"Entrer un nom d'au moins {{ limit }} caractères", maxMessage:"Nom ne doit pas dépasser {{ limit }} caractères")]
+    #[Assert\Regex(pattern: '/^[a-zA-Z]+$/i', message: "Le nom doit contenir uniquement des caractères alphabétiques")]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Prenom ne doit pas être vide")]
+    #[Assert\Regex(pattern: '/^[a-zA-Z]+$/i', message: "Le Prenom doit contenir uniquement des caractères alphabétiques")]
+    #[Assert\Length(min:3, max:255, minMessage:"Entrer un Prenom d'au moins {{ limit }} caractères", maxMessage:"Nom ne doit pas dépasser {{ limit }} caractères")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -32,6 +37,9 @@ class Employe
 
     #[ORM\OneToMany(mappedBy: 'employe', targetEntity: Conge::class)]
     private Collection $conges;
+
+    #[ORM\Column(length: 255)]
+    private ?string $etat = null;
 
     public function __construct()
     {
@@ -137,6 +145,18 @@ class Employe
     public function __toString(): string
     {
         return ("Employe".$this.getNom()."_".$this.getPrenom() );
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
     }
 
 

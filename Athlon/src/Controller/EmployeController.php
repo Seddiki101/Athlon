@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Employe;
 use App\Form\EmployeType;
 use App\Repository\EmployeRepository;
+use App\Repository\CongeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+
+
 
 #[Route('/employe')]
 class EmployeController extends AbstractController
@@ -23,9 +27,22 @@ class EmployeController extends AbstractController
    
    
     #[Route('/list', name: 'list')]
-    public function list(EmployeRepository $repository){
-        $ctg=$repository->findAll();
-        return $this->render('employe/index.html.twig',['employes'=>$ctg]);
+    public function list(EmployeRepository $repository , CongeRepository $congeRepository , EntityManagerInterface $entityManager){
+        $employes=$repository->findAll();
+
+
+        foreach ($employes as $employe) {
+            $conges = $congeRepository->findByDateDebutAndDateFin(new \DateTime());
+    
+            if (count($conges) > 0 && $conges[0]->getEmploye() === $employe) {
+                $employe->setEtat('Congé');
+            } else {
+                $employe->setEtat('Disponible');
+            }
+        }
+        $entityManager->flush();
+
+        return $this->render('employe/index.html.twig',['employes'=>$employes]);
     }
  
    
@@ -40,6 +57,7 @@ class EmployeController extends AbstractController
        
         
         if ($form->isSubmitted() && $form->isValid()) {
+             $employe->setEtat('Disponible');
 
             $file = $form->get('img_employe')->getData();
 
@@ -52,6 +70,7 @@ class EmployeController extends AbstractController
                 $employe->setImgEmploye($fileName);
             }
           
+
 
 
             

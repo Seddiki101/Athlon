@@ -38,6 +38,15 @@ class CongeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByDateDebutAndDateFin(\DateTime $date)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        return $qb->where(':date BETWEEN c.dateD AND c.dateF')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Conge[] Returns an array of Conge objects

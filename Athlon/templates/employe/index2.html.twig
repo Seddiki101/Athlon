@@ -16,7 +16,7 @@
   display: inline-block;
   font-size: 12px;
   margin: 4px 2px;
-  cursor: progress;
+  cursor: pointer;
 }
 
 .button1 {background-color: #4CAF50;} /* Green */
@@ -41,6 +41,7 @@
                 <th>Cin</th>
                 <th>Nom</th>
                 <th>Prenom</th>
+                  <th>Etat</th>
                 <th>Image de l'employe</th>
                 <th>Actions</th>
             </tr>
@@ -52,10 +53,11 @@
                 <td>{{ employe.cin }}</td>
                 <td>{{ employe.nom }}</td>
                 <td>{{ employe.prenom }}</td>
-                <td><img src="{{ asset('B/media/' ~ employe.imgEmploye) }}?t={{ date().getTimestamp() }}" alt="Employe image"   width="50" height="50"
-                  title="Image D'employe"></td>
+                 <td>{{ employe.etat }}</td>
+                <td><img src="{{ asset('B/media/' ~ employe.imgEmploye) }}?t={{ date().getTimestamp() }}" alt="Employe image"   width="70" height="50"
+                  title="Image D'employe" style="border-radius: 10%"></td>
                 <td>
-                    <a href="{{ path('app_employe_show', {'id': employe.id}) }}"><button class="button button1">Afficher ou Supprimer</button></a>
+                    <a href="{{ path('app_employe_show', {'id': employe.id}) }}"><button class="button button1">Afficher</button></a>
                     <a href="{{ path('app_employe_edit', {'id': employe.id}) }}"><button class="button button2">Modifier</button></a>
                 </td>
             </tr>
