@@ -25,10 +25,6 @@ class Produit
      */
     private $brand;
 
-    /**
-     * @ORM\OneToMany(targetEntity=CommandeItem::class, mappedBy="produit")
-     */
-    private $quantity;
 
     public function __construct()
     {

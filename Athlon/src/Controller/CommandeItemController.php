@@ -26,28 +26,39 @@ class CommandeItemController extends AbstractController
     }
 
     /**
-     * @Route("/showByCommande/{idc}", name="app_commande_item_index_commande", methods={"GET"})
+     * @Route("/showByCommande/{idC}", name="app_commande_item_index_commande", methods={"GET"})
      */
-    public function indexbycommande(CommandeItemRepository $commandeItemRepository,int $idc ): Response
+    public function indexbycommande(CommandeItemRepository $commandeItemRepository, int $idC): Response
     {
         return $this->render('commande_item/index.html.twig', [
-            'commande_items' => $commandeItemRepository->findByCommande($idc),
+            'commande_items' => $commandeItemRepository->findByCommande($idC),
         ]);
     }
 
     /**
-     * @Route("/new", name="app_commande_item_new", methods={"GET", "POST"})
+     * @Route("/showByCommande/front/{idC}", name="app_commande_item_index_commande_front", methods={"GET"})
      */
-    public function new(Request $request, CommandeItemRepository $commandeItemRepository): Response
+    public function indexbycommandefront(CommandeItemRepository $commandeItemRepository, int $idC): Response
+    {
+        return $this->render('commande_item/mesItems.twig.html', [
+            'items' => $commandeItemRepository->findByCommande($idC),
+        ]);
+    }
+
+    /**
+     * @Route("/new/{idC}", name="app_commande_item_new", methods={"GET", "POST"})
+     */
+    public function new($idC, Request $request, CommandeItemRepository $commandeItemRepository, \App\Repository\CommandeRepository $commandeRepository): Response
     {
         $commandeItem = new CommandeItem();
         $form = $this->createForm(CommandeItemType::class, $commandeItem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $commandeItem->setCommande($commandeRepository->findOneBy(['idC' => $idC]));
             $commandeItemRepository->add($commandeItem, true);
 
-            return $this->redirectToRoute('app_commande_item_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_commande_item_index_commande', ['idC' => $idC], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('commande_item/new.html.twig', [
@@ -55,6 +66,7 @@ class CommandeItemController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
     /**
      * @Route("/{id}", name="app_commande_item_show", methods={"GET"})
@@ -67,9 +79,9 @@ class CommandeItemController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_commande_item_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit/{idC}", name="app_commande_item_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, CommandeItem $commandeItem, CommandeItemRepository $commandeItemRepository): Response
+    public function edit($idC, Request $request, CommandeItem $commandeItem, CommandeItemRepository $commandeItemRepository): Response
     {
         $form = $this->createForm(CommandeItemType::class, $commandeItem);
         $form->handleRequest($request);
@@ -77,7 +89,7 @@ class CommandeItemController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $commandeItemRepository->add($commandeItem, true);
 
-            return $this->redirectToRoute('app_commande_item_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_commande_item_index', ["idC" => $idC], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('commande_item/edit.html.twig', [
@@ -87,14 +99,14 @@ class CommandeItemController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_commande_item_delete", methods={"POST"})
+     * @Route("/{id}/{idC}", name="app_commande_item_delete", methods={"POST"})
      */
-    public function delete(Request $request, CommandeItem $commandeItem, CommandeItemRepository $commandeItemRepository): Response
+    public function delete($idC, Request $request, CommandeItem $commandeItem, CommandeItemRepository $commandeItemRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$commandeItem->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $commandeItem->getId(), $request->request->get('_token'))) {
             $commandeItemRepository->remove($commandeItem, true);
         }
 
-        return $this->redirectToRoute('app_commande_item_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_commande_item_index_commande', ['idC' => $idC], Response::HTTP_SEE_OTHER);
     }
 }

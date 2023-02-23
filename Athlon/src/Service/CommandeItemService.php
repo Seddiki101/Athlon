@@ -6,12 +6,12 @@ use App\Entity\OrderItems;
 use App\Repository\OrdersItemsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-class OrderItemsService
+class CommandeItemService
 {
 
-    public static function insertOrUpdate(\App\Entity\CommandeItem $item, \App\Repository\CommandeItemRepository $orderItemsRepo, EntityManagerInterface $entityManager){
+    public static function insertOrUpdate(\App\Entity\CommandeItem $item, \App\Repository\CommandeItemRepository $commandeItemRepository, EntityManagerInterface $entityManager){
 
-        $dbItem = $orderItemsRepo->findOneBy(['commande'=>$item->getCommande(),'produit'=>$item->getProduit(),]);
+        $dbItem = $commandeItemRepository->findOneBy(['commande'=>$item->getCommande(),'produit'=>$item->getProduit(),]);
         if (!$dbItem) {
             $dbItem=$item;
         }

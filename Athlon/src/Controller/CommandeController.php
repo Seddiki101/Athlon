@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 /**
  * @Route("/commande")
  */
@@ -23,6 +24,30 @@ class CommandeController extends AbstractController
         return $this->render('commande/index.html.twig', [
             'commandes' => $commandeRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/mes/Commandes", name="mesCommande", methods={"GET"})
+     */
+    public function mesCommande(CommandeRepository $commandeRepository): Response
+    {
+        $commande = $commandeRepository->findBy([
+            "user" => 3,
+            "statue" => "placed"
+        ]);
+        return $this->render('commande/mesCommande.html.twig', [
+            'commandes' => $commande,
+        ]);
+    }
+
+    /**
+     * @Route("/orderCOmmande", name="orderCommande")
+     */
+    public function placeOrder(\App\Service\CartService1 $cartService, \App\Service\CommandeService $commandeService)
+    {
+        $commandeService->placeOrder($cartService->getCurrentOrder(), $cartService, $this->getDoctrine()->getManager());
+        $this->addFlash('success', 'commande order success');
+        return $this->redirectToRoute('cart');
     }
 
     /**
@@ -81,10 +106,22 @@ class CommandeController extends AbstractController
      */
     public function delete(Request $request, Commande $commande, CommandeRepository $commandeRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$commande->getIdC(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $commande->getIdC(), $request->request->get('_token'))) {
             $commandeRepository->remove($commande, true);
         }
 
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/front/{idC}", name="app_commande_delete_front", methods={"POST"})
+     */
+    public function deletefront(Request $request, Commande $commande, CommandeRepository $commandeRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $commande->getIdC(), $request->request->get('_token'))) {
+            $commandeRepository->remove($commande, true);
+        }
+
+        return $this->redirectToRoute('mesCommande', [], Response::HTTP_SEE_OTHER);
     }
 }

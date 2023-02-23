@@ -6,6 +6,8 @@ use App\Repository\CommandeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=CommandeRepository::class)
@@ -22,32 +24,35 @@ class Commande
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message="ce chanp est obligatoire")
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="ce chanp est obligatoire")
      */
     private $user;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="ce chanp est obligatoire")
      */
-    private $statue;
+    private $statue = 'pending';
 
     /**
      * @ORM\OneToMany(targetEntity=CommandeItem::class, mappedBy="commande")
      */
     private $orderItem;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Livraison::class, mappedBy="commande", cascade={"persist", "remove"})
+     */
+    private $livraison;
+
     public function __construct()
     {
-        $this->orderItem = new ArrayCollection();
-    }
 
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getIdC(): ?int
@@ -98,6 +103,7 @@ class Commande
         return $this;
     }
 
+
     /**
      * @return Collection<int, CommandeItem>
      */
@@ -116,6 +122,7 @@ class Commande
         return $this;
     }
 
+//
     public function removeOrderItem(CommandeItem $orderItem): self
     {
         if ($this->orderItem->removeElement($orderItem)) {
@@ -128,5 +135,31 @@ class Commande
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getIdC() . "";
+    }
+
+    public function getLivraison(): ?Livraison
+    {
+        return $this->livraison;
+    }
+
+    public function setLivraison(?Livraison $livraison): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($livraison === null && $this->livraison !== null) {
+            $this->livraison->setCommande(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($livraison !== null && $livraison->getCommande() !== $this) {
+            $livraison->setCommande($this);
+        }
+
+        $this->livraison = $livraison;
+
+        return $this;
+    }
 
 }

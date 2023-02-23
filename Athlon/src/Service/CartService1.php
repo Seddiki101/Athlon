@@ -1,14 +1,14 @@
 <?php
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\Request;
-use App\Controller\CartController;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
+use Psr\Log\LoggerInterface;
+
 
 class CartService1 {
+
+    private $logger;
 
     protected $session;
     protected $produitRepository;
@@ -17,11 +17,11 @@ class CartService1 {
     protected $entityManager;
     protected $request;
 
-    public function __construct(SessionInterface $session, \App\Repository\ProduitRepository $produitRepository,\App\Repository\CommandeRepository $commandeRepository, \App\Repository\CommandeItemRepository $commandeItemRepository,EntityManagerInterface $entityManager){
+    public function __construct(LoggerInterface $logger,SessionInterface $session, \App\Repository\ProduitRepository $produitRepository,\App\Repository\CommandeRepository $commandeRepository, \App\Repository\CommandeItemRepository $commandeItemRepository,EntityManagerInterface $entityManager){
+        $this->logger = $logger;
 
         $this->session = $session;
         $this->produitRepository = $produitRepository;
-
         $this->commandeRepo = $commandeRepository;
         $this->commandeitemRepo = $commandeItemRepository;
         $this->entityManager = $entityManager;
@@ -30,11 +30,12 @@ class CartService1 {
     public function remove(int $id){
 
         $cart = $this->session->get('cart',[]);
+
         $commandeitem = new \App\Entity\CommandeItem();
         $commandeitem->setQuantity($cart[$id])
             ->setProduit($this->produitRepository->find($id))
             ->setCommande($this->getCurrentOrder());
-        OrderItemsService::delete($commandeitem, $this->commandeitemRepo, $this->entityManager);
+        CommandeItemService::delete($commandeitem, $this->commandeitemRepo, $this->entityManager);
 
         if (!empty($cart[$id]))
             unset($cart[$id]);
@@ -53,7 +54,7 @@ class CartService1 {
             ->setProduit($this->produitRepository->find($id))
             ->setCommande($this->getCurrentOrder());
 
-        OrderItemsService::insertOrUpdate($commandeItem, $this->commandeitemRepo, $this->entityManager);
+        CommandeItemService::insertOrUpdate($commandeItem, $this->commandeitemRepo, $this->entityManager);
         $this->session->set('cart',$cart);
 
     }
@@ -68,11 +69,12 @@ class CartService1 {
 
 
     public function getCurrentOrder():\App\Entity\Commande{
-        // dd($this->getUser());
-        return $this->session -> get('currentOrder',$this->commandeRepo->findOneBy([
-            'idC' => 1
+        $commande =  $this->session -> get('currentOrder',$this->commandeRepo->findOneBy([
+            'user'=>3,
+            'statue'=>'pending'
         ]));
 
+        return $commande;
     }
     public function getCart() : array{
 
@@ -90,7 +92,6 @@ class CartService1 {
                 'quantity' => $quantity
             ];
         }
-        //dd($cartWithData);
         return $cartWithData;
     }
 

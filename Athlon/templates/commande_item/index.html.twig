@@ -5,6 +5,8 @@
 
 
     {% block body %}
+        <a href="{{ path('app_commande_item_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
+
         <table class="table">
             <thead>
             <tr>
@@ -18,11 +20,14 @@
                 <td>{{ commande_item.quantity }}</td>
                 <td>{{ commande_item.produit.brand }}</td>
                 <td>
-                    <form method="post" action="{{ path('app_commande_item_delete', {'id': commande_item.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                    <form method="post"
+                          action="{{ path('app_commande_item_delete', {'id': commande_item.id, 'idC':app.request.get('idC') }) }}"
+                          onsubmit="return confirm('Are you sure you want to delete this item?');">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande_item.id) }}">
-                        <button class="btn btn-danger" >Delete</button>
+                        <button class="btn btn-danger">Delete</button>
                     </form>
-                    <a class="btn btn-success" href="{{ path('app_commande_item_edit', {'id': commande_item.id}) }}">edit</a>
+                    <a class="btn btn-success"
+                       href="{{ path('app_commande_item_edit', {'id': commande_item.id,'idC': app.request.get('idC')}) }}">edit</a>
                 </td>
                 </tr>
             {% endfor %}

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommandeItemRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommandeItemRepository::class)
@@ -22,16 +23,19 @@ class CommandeItem
      * * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="produit", referencedColumnName="id_p")
      * })
+     * @Assert\NotBlank(message="ce champ est obligatoire")
      */
     private $produit;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="ce champ est obligatoire")
+     * @Assert\Positive
      */
     private $quantity;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Commande::class)
+     * @ORM\ManyToOne(targetEntity=Commande::class,cascade={"persist"})
      * * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="commande", referencedColumnName="id_c")
      * })

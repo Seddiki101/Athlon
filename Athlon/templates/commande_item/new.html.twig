@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %}New CommandeItem{% endblock %}
 
@@ -7,5 +7,4 @@
 
     {{ include('commande_item/_form.html.twig') }}
 
-    <a href="{{ path('app_commande_item_index') }}">back to list</a>
 {% endblock %}

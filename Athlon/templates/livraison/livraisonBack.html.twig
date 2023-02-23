@@ -1,0 +1,50 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+{% block body %}
+    <a href="{{ path('app_livraison_new_back') }}" class="btn btn-primary">ajout</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <td>addresse</td>
+            <td>email</td>
+            <th>user</th>
+            <th>date</th>
+            <th>commande</th>
+            <th>etat</th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for livraison in livraisons %}
+            <tr>
+                <td>{{ livraison.adresse }}</td>
+                <td>{{ livraison.email }}</td>
+
+                <td>{{ livraison.commande.user }}</td>
+                <td>{{ livraison.date  | date }}</td>
+                <td>{{ livraison.commande }}</td>
+                <td>
+                    {% if livraison.confirmer %}
+                        confirmé
+                    {% else %}
+                        non confimé
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="post" action="{{ path('app_livraison_delete', {'id': livraison.id}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ livraison.id) }}">
+                        <button class="btn btn-danger">delete</button>
+                    </form>
+                    <a class="btn btn-success {% if livraison.confirmer %} disabled {% endif %}"
+                       href="{{ path('app_livraison_editconfirm', {'id': livraison.id}) }}">confirmer</a>
+
+                    <a href="{{ path('app_livraison_edit_back', {'id': livraison.id}) }}" class="btn btn-warning"
+                    >edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
