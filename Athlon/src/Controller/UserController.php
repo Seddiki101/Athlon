@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\UserTypedit;
+use App\Form\UserTypedit2;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,13 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
+		
+			if (!$this->isGranted('ROLE_ADMIN')) {
+            // If not, redirect to a different page or display an error message
+            return $this->redirectToRoute('app_home');
+			}
+		
+		
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
@@ -25,6 +33,15 @@ class UserController extends AbstractController
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
     {
+		
+		
+		if (!$this->isGranted('ROLE_ADMIN')) {
+            // If not, redirect to a different page or display an error message
+            return $this->redirectToRoute('app_home');
+			}
+		
+		
+		
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -44,14 +61,42 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
+		
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	    #[Route('/B/{id}', name: 'app_user_show2', methods: ['GET'])]
+    public function show2(User $user): Response
+    {
+		
+		if (!$this->isGranted('ROLE_ADMIN')) {
+            // If not, redirect to a different page or display an error message
+            return $this->redirectToRoute('app_home');
+			}
+			
+		
+        return $this->render('user/show2.html.twig', [
+            'user' => $user,
+        ]);
+    }
+	
+	
+	
+	
 
     #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
+		
         $form = $this->createForm(UserTypedit::class, $user);
         $form->handleRequest($request);
 
@@ -69,8 +114,6 @@ class UserController extends AbstractController
                 );
                 $user->setImgUsr($fileName);
             }
-			
-			
 			
 
             $userRepository->save($user, true);
@@ -91,7 +134,7 @@ class UserController extends AbstractController
 	    #[Route('/{id}/edit2', name: 'app_user_edit2', methods: ['GET', 'POST'])]
     public function edit2(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserTypedit2::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

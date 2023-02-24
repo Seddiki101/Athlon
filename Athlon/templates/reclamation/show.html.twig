@@ -1,11 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Reclamation{% endblock %}
 
 {% block body %}
 
 
-
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">
+							<div class="container">	
 					
 
 
@@ -28,14 +33,26 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reclamation_index') }}">back to list</a>
 
-    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
 
-    {{ include('reclamation/_delete_form.html.twig') 
+
+
+<br/>
+<br/>
+
+    {{ include('reclamation/_delete_form.html.twig') }}
+	
+<br/>
+	
+	    <a href="{{ path('app_reclamation_index') }}">back to list</a>
 	
 	
-	
+												</div>
+								</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
 	
 	
 	

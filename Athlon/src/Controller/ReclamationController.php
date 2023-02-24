@@ -19,9 +19,19 @@ class ReclamationController extends AbstractController
     #[Route('/', name: 'app_reclamation_index', methods: ['GET'])]
     public function index(ReclamationRepository $reclamationRepository): Response
     {
+		
+		
+		if (!$this->isGranted('ROLE_ADMIN')) {
+            // If not, redirect to a different page or display an error message
+            return $this->redirectToRoute('app_home');
+        }
+		
+		//if admin
         return $this->render('reclamation/index.html.twig', [
             'reclamations' => $reclamationRepository->findAll(),
         ]);
+		
+		
     }
 
     #[Route('/new', name: 'app_reclamation_new', methods: ['GET', 'POST'])]

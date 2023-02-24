@@ -31,16 +31,16 @@
         {% block javascripts %}
 		
 		  <!-- Libraries JS Files -->
-  <script src="{{asset('/B/libraries/jquery/jquery.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/jquery.easing/jquery.easing.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/php-email-form/validate.js')}}"></script>
-  <script src="{{asset('/B/libraries/waypoints/jquery.waypoints.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/counterup/counterup.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/owl.carousel/owl.carousel.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/isotope-layout/isotope.pkgd.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/venobox/venobox.min.js')}}"></script>
-  <script src="{{asset('/B/libraries/aos/aos.js')}}"></script>
+  <script src="{{asset("assets/B/libraries/jquery/jquery.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/jquery.easing/jquery.easing.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/php-email-form/validate.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/waypoints/jquery.waypoints.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/counterup/counterup.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/owl.carousel/owl.carousel.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/isotope-layout/isotope.pkgd.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/venobox/venobox.min.js")}}"></script>
+  <script src="{{asset("assets/B/libraries/aos/aos.js")}}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{asset("assets/B/js/main.js")}}" ></script>
@@ -66,7 +66,7 @@
 				</a>
 
 			  	<a class="brand" href="index.html">
-			  		Edmin
+			  		Athlon Dashboard
 			  	</a>
 
 				<div class="nav-collapse collapse navbar-inverse-collapse">
@@ -84,25 +84,17 @@
 						
 						
 						
-						                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown
-                                <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Item No. 1</a></li>
-                                    <li><a href="#">Don't Click</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Example Header</li>
-                                    <li><a href="#">A Separated link</a></li>
-                                </ul>
-                            </li>
+						
 						
 						
 						<li><a href="{{ path('app_logout') }}">Logout</a></li>
 						
 						<li class="nav-user dropdown">
 							<a  class="dropdown-toggle" data-toggle="dropdown">
-								<img src="/B/media/user1.png" class="nav-avatar" />
+								
 								<b class="caret"></b>
 								{% if app.user %}
+								<img src="{{ asset('/media/' ~ app.user.imgUsr) }}?t={{ date().getTimestamp() }}" class="nav-avatar" />
 								{{ app.user.prenom }}
 								{% endif %}
 							</a>

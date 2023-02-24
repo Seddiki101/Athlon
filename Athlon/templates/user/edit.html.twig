@@ -3,9 +3,38 @@
 {% block title %}Edit User{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
 
+
+
+	<style>
+.centered-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    position: absolute;
+    top: 55%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+   
+  }
+
+	</style>
+		
+		
+				    <h3>Edit Account</h3>
+		
+		<div class="contact-form">	
+	<div class="centered-text">
+		  <div class="container">
+        <div class="row">
+
+		
     {{ include('user/_form.html.twig', {'button_label': 'Update'} ) }}
+	
+	</div>
+	</div>
+	</div>
 
 
 {% endblock %}

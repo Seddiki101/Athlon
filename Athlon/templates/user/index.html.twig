@@ -6,7 +6,28 @@
 
 {% if is_granted('ROLE_ADMIN') %}
 
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">
+							<div class="container">	
+
+
+
+
+
     <h1>User index</h1>
+
+
+    <a href="{{ path('app_user_new') }}">Create new</a>
+<br/>
+<br/>
+
+
+
 
     <table class="table">
         <thead>
@@ -14,7 +35,7 @@
                 <th>Id</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Password</th>
+
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Phone</th>
@@ -33,7 +54,6 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
                 <td>{{ user.nom }}</td>
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.phone }}</td>
@@ -41,11 +61,21 @@
                 <td>{{ user.dateins ? user.dateins|date('Y-m-d') : '' }}</td>
                 <td>{{ user.dateD ? user.dateD|date('Y-m-d') : '' }}</td>
                 <td>{{ user.dateF ? user.dateF|date('Y-m-d') : '' }}</td>
-                <td>{{ user.imgUsr }}</td>
+                
+				
+				
+				
+				  <td><img src="{{ asset('media/' ~ user.imgUsr ) }}?t={{ date().getTimestamp() }}" alt="user image"   width="50" height="50"
+                  title="Image D'utilisateur"></td>
+				
+				
+				
+				
+				
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_user_show2', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit2', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -56,12 +86,17 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+
 	
 	
 	
 	
-	
+										</div>
+								</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
 	
 	
 	

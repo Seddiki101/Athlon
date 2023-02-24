@@ -1,16 +1,40 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Reclamation index{% endblock %}
 
 {% block body %}
+
+
+
+
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">
+							<div class="container">	
+
+
+
+
+
+
+
     <h1>Reclamation index</h1>
+
+
+
+<br/>
+<br/>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Titre</th>
-                <th>Desipticon</th>
+                <th>Description</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,7 +46,7 @@
                 <td>{{ reclamation.desipticon }}</td>
                 <td>
                     <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
-                    <a href="{{ path('app_reclamation_edit', {'id': reclamation.id}) }}">edit</a>
+                    <a href="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}">delete</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +57,25 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_reclamation_new') }}">Create new</a>
+
+	
+	
+	
+	
+	
+	
+		
+									</div>
+								</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+	
+	
+	
+	
+	
 {% endblock %}

@@ -48,16 +48,16 @@
     <header class="header-section header-normal">
         <div class="container-fluid">
             <div class="logo">
-                <a href="./index.html">
-                    <img src="img/logo.png" alt="">
+                <a href="">
+                    <img src="/F/img/logo.png" alt="">
                 </a>
             </div>
 
             <div class="top-social">
 			{% if app.user %}
                 <a href="{{ path('app_user_show', {'id': app.user.id}) }} ">  <i class="fa fa-user"></i>  hello {{ app.user.prenom }}  </a>
-				<img src="{{ asset('/media/' ~ app.user.imgUsr) }}?t={{ date().getTimestamp() }}" alt="Employe image"   width="50" height="50"  style="border-radius: 60%"
-                  title="Image D'employe">
+				<img src="{{ asset('/media/' ~ app.user.imgUsr) }}?t={{ date().getTimestamp() }}" alt=""   width="50" height="50"  style="border-radius: 60%"
+                  title="">
 				
 				
 				{% endif %}
