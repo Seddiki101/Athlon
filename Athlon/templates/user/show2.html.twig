@@ -1,0 +1,97 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">
+							<div class="container">	
+
+
+
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ user.phone }}</td>
+            </tr>
+            <tr>
+                <th>Adres</th>
+                <td>{{ user.adres }}</td>
+            </tr>
+            <tr>
+                <th>Dateins</th>
+                <td>{{ user.dateins ? user.dateins|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateD</th>
+                <td>{{ user.dateD ? user.dateD|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateF</th>
+                <td>{{ user.dateF ? user.dateF|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>ImgUsr</th>
+                <td>{{ user.imgUsr }}</td>
+            </tr>
+            <tr>
+                <th>IsVerified</th>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <a class="btn btn-warning" href="{{ path('app_user_edit2', {'id': user.id}) }}">edit</a>
+
+<br/>
+
+    {{ include('user/_delete_form.html.twig') }}
+
+<br/>	
+	
+	<a href="{{ path('app_user_index') }}">back to list</a>
+	
+	
+											</div>
+								</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+	
+{% endblock %}
