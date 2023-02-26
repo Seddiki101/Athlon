@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employe index{% endblock %}
+
+{% block body %}
+    
+
+ <section class="trainer-section spad">
+ <h1 class="text-center" style="color: white;">List Coachs</h1>
+  <br>
+  <div class="container">
+    <div class="row">
+             {% for employe in employes %}
+
+        <div class="col-md-4 mb-4">
+          <div class="employee-item">
+            <img src="{{ asset('B/media/' ~  employe.imgEmploye) }}" alt="{{ employe.nom }}'s photo" width="200" height="200">
+            <h3 style="color: white;">COACH</h3>
+            <p class="employee-status" style="color:#E43434">{{  employe.etat  }}</p>
+            <a href="#" class="employee-link primary-btn" style="color:#E43434">{{ employe.prenom }} </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+    
+{% endblock %}
