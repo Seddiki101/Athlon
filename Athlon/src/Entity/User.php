@@ -37,15 +37,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
 	#[Assert\NotBlank(message : "Last name is required")]
+	#[Assert\Length(min :3 ,minMessage :"Last Name needs to have at least 3 characters")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
 	#[Assert\NotBlank(message : "First name is required")]
+	#[Assert\Length(min :3 ,minMessage :"Name needs to have at least 3 characters")]
     private ?string $prenom = null;
 
     #[ORM\Column(nullable: true)]
 	#[Assert\Positive]
-	#[Assert\Length(min :4,max : 8,minMessage :"Votre Numero doit être au moins {{ limit }} characters long",maxMessage : "Votre Numero ne peut pas dépasser {{ limit }} characters")]
+	#[Assert\Length(min :8,max : 11,minMessage :"Votre Numero doit être au moins {{ limit }} characters long",maxMessage : "Votre Numero ne peut pas dépasser {{ limit }} characters")]
     private ?int $phone = null;
 
     #[ORM\Column(length: 255, nullable: true)]

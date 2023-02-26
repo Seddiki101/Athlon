@@ -45,8 +45,8 @@
                 <td>{{ reclamation.titre }}</td>
                 <td>{{ reclamation.desipticon }}</td>
                 <td>
-                    <a href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
-                    <a href="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}">delete</a>
+                    <a class="btn btn-success" href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a class="btn btn-danger" href="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}">delete</a>
                 </td>
             </tr>
         {% else %}

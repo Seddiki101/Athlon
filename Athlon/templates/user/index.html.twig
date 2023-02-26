@@ -22,7 +22,7 @@
     <h1>User index</h1>
 
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('app_user_new') }}">Create new</a>
 <br/>
 <br/>
 
@@ -74,8 +74,8 @@
 				
                 <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('app_user_show2', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit2', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('app_user_show2', {'id': user.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_user_edit2', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

@@ -3,29 +3,37 @@
                     
 {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 
-<table>
 
-<tr>
 
-	<td>	{{ form_label(form.titre,"titre") }} </td>
+
+
+	<td>	{{ form_label(form.titre,"titre",{'label_attr': {'style': 'color: white;' }}) }} </td>
 	<td>	{{ form_widget(form.titre) }}    </td>
-	<td>	{{ form_errors(form.titre) }}    </td>
+	<td>	
+	<li class="error-message">
+	{{ form_errors(form.titre) }}    
+	</li>
+	</td>
 		
-</tr>
+
 		
-<tr>
+
 		
-	<td>	{{ form_label(form.desipticon,"Description") }} </td>
+	<td>	{{ form_label(form.desipticon,"Description",{'label_attr': {'style': 'color: white;' }}) }} </td>
 	<td>	{{ form_widget(form.desipticon) }} </td>
-	<td>	{{ form_errors(form.desipticon) }} </td>
+	<td>	
+	<li class="error-message">
+	{{ form_errors(form.desipticon) }}
+	</li>
+	</td>
 
-</tr>
 
 
-</table>
 
-<tr>	
+
+
+	
     <button class="c-btn">{{ button_label|default('Save') }}</button>
-</tr>
+
 	
 {{ form_end(form) }}

@@ -4,7 +4,11 @@
 
 {% block body %}
 
-
+<style>
+.error-message{
+   color: red;
+}
+</style>
 
    <section class="contact-section spad">
         <div class="container">
@@ -39,25 +43,29 @@
 		    
 			
 			{{ form_label(registrationForm.nom,"Nom",{'label_attr': {'style': 'color: white;' }}) }} 
-			{{ form_widget(registrationForm.nom) }}    
+			{{ form_widget(registrationForm.nom) }}
+			<li class="error-message">
 			{{ form_errors(registrationForm.nom) }} 
-
+			</li>
 
 			{{ form_label(registrationForm.prenom,"Prenom",{'label_attr': {'style': 'color: white;' }}) }} 
-			{{ form_widget(registrationForm.prenom) }}    
+			{{ form_widget(registrationForm.prenom) }}
+			<li class="error-message">
 			{{ form_errors(registrationForm.prenom) }}  
-				
+			</li>	
 				
 			{{ form_label(registrationForm.email,"Email",{'label_attr': {'style': 'color: white;' }}) }} 
 			{{ form_widget(registrationForm.email) }}    
+			<li class="error-message">
 			{{ form_errors(registrationForm.email) }} 				
-				
+				</li>
 				
 				
 			{{ form_label(registrationForm.plainPassword,"Password",{'label_attr': {'style': 'color: white;' }}) }} 
-			{{ form_widget(registrationForm.plainPassword) }}    
+			{{ form_widget(registrationForm.plainPassword) }}
+			<li class="error-message">			
 			{{ form_errors(registrationForm.plainPassword) }} 		
-	
+			</li>
 				
 		
 		{{ form_label(registrationForm.agreeTerms,"Agree to Terms",{'label_attr': {'style': 'color: white;' }}) }} 
