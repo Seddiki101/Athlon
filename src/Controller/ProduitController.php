@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Produit;
+use App\Entity\Comments;
 use App\Entity\Categorie;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\CategorieRepository;
@@ -17,6 +18,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Psr\Log\LoggerInterface;
+use App\Form\CommentsType;
+use DateTime;
+
+
+
+
 
  
 class ProduitController extends AbstractController
@@ -40,15 +47,51 @@ class ProduitController extends AbstractController
     
     
     #[Route('/detaille/{id}', name: 'detaille')]
-    public function detaille($id,ManagerRegistry $mg, LoggerInterface $logger): Response
+    public function detaille($id,ManagerRegistry $mg, Produit $Produit, Request $request,LoggerInterface $logger): Response
     {
         $repo=$mg->getRepository(Produit::class);
         $resultat = $repo ->find($id);
         $logger->info("The array is: " . json_encode($resultat));
+
+        // Partie commentaires
+        // On crée le commentaire "vierge"
+        $comment = new Comments;
+
+        // On génère le formulaire
+        $commentForm = $this->createForm(CommentsType::class, $comment);
+
+        $commentForm->handleRequest($request);
+ // Traitement du formulaire
+ if($commentForm->isSubmitted() && $commentForm->isValid()){
+    $comment->setCreatedAt(new DateTime());
+    $comment->setProduits($Produit);
+
+     // On récupère le contenu du champ parentid
+     $parentid = $commentForm->get("parentid")->getData();
+
+         // On va chercher le commentaire correspondant
+         $em = $this->getDoctrine()->getManager();
+         if($parentid != null){
+            $parent = $em->getRepository(Comments::class)->find($parentid);
+        }
+
+        // On définit le parent
+        $comment->setParent($parent ?? null);
+         $em->persist($comment);
+         $em->flush();
+         $this->addFlash('message', 'Votre commentaire a bien été envoyé');
+            return $this->redirectToRoute('app_front');
+
+
+ }
+ 
         return $this->render('produit/readmore.html.twig', [
             'Produit' => $resultat,
+            
+            'commentForm' => $commentForm->createView()
         ]);
-    }
+    
+}
 
     #[Route('/Menuaff', name: 'Menuafficher')]
     public function afficherMenu(ManagerRegistry $em): Response
