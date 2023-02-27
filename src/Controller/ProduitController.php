@@ -103,14 +103,23 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/ProduitFront/afficher', name: 'app_front')]
-    public function afficheFront(ManagerRegistry $em): Response
+    public function afficheFront(ProduitRepository $annoncesRepo, Request $request): Response
     {
-        $repo=$em->getRepository(Produit::class);
-        $result=$repo->findAll();
-        return $this->render ('Produit/affichFront.html.twig',['Produit'=>$result]);
-   
+        // On définit le nombre d'éléments par page
+        $limit = 3;
+         // On récupère le numéro de page
+         $page = (int)$request->query->get("page", 1);
+         $Produit = $annoncesRepo->getPaginatedAnnonces($page, $limit)
+         ;
+          // On récupère le nombre total d'annonces
+        $total = $annoncesRepo->getTotalProduits();
+         return $this->render('produit/affichFront.html.twig', compact('Produit','total','limit','page'));
        
     }
+
+    
+
+
 
     #[Route('/Produit/add', name: 'ProduitAdd')]
     public function add(ManagerRegistry $doctrine,Request $request,SluggerInterface $slugger): Response
@@ -225,5 +234,6 @@ class ProduitController extends AbstractController
             'articles' => $articles,
         ]);
     }
- 
+
+   
 }

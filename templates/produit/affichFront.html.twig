@@ -44,7 +44,34 @@
                 </div>
               
                   {% endfor%}
-                
+
+
+                  <ul class="pagination">
+                  <li class="{{(page == 1) ? 'disabled' : ''}}">
+                  <a href="?page = 1">
+                  <i class="fass fa-step-backward"></i>
+                  </a>
+                  </li>
+                  <li class="{{(page == 1) ? 'disabled' : ''}}">
+                  <a href="{{ (page > 1)  ? '?page=1' ~ (page - 1) : '' }} ">
+                    <i class="fass fa-angle-left"></i>
+                  </a>
+
+                  </li>
+                  {% set pages = (total / limit)| round(0, 'ceil')%}
+                  {% for item in 1..pages%}
+
+                  <li class="{{ (page == item) ? 'active' : '' }}">
+                 <a href="?page={{item}}">{{item}}</a>
+                 </li>
+                  {% endfor%}
+                  <li class="{{(page == pages) ? 'disabled' : ''}}">
+                  <a href="{{ (page < pages)  ? '?page=' ~ (page + 1) : '' }} ">
+                    <i class="fass fa-angle-right"></i>
+                  </a>
+
+                  </li>
+                  </ul>
                     </div>
                 </div>
             </div>

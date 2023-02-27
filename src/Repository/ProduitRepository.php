@@ -39,6 +39,26 @@ class ProduitRepository extends ServiceEntityRepository
         }
     }
 
+    public function getPaginatedAnnonces($page, $limit){
+        $query = $this->createQueryBuilder('a')
+        
+        ->setFirstResult(($page * $limit) - $limit)
+        ->setMaxResults($limit)
+    ;
+    return $query->getQuery()->getResult();
+}
+
+
+public function getTotalProduits($filters = null){
+    $query = $this->createQueryBuilder('a')
+        ->select('COUNT(a)')
+       
+    
+   ;
+
+    return $query->getQuery()->getSingleScalarResult();
+}
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */
