@@ -14,6 +14,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
+use Captcha\Bundle\CaptchaBundle\Validator\Constraints\ValidCaptcha;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 
 class CommentsType extends AbstractType
@@ -35,14 +37,30 @@ class CommentsType extends AbstractType
         ])
         ->add('content')
         ->add('rgpd', CheckboxType::class, [
+            'label' => 'Voulez vous vraiment publier ce comentaire ?',
+          
             'constraints' => [
                 new NotBlank()
+               
             ]
         ])
         ->add('parentid', HiddenType::class, [
             'mapped' => false
         ])
-        ->add('envoyer', SubmitType::class)
+        ->add('Publier', SubmitType::class,[
+            'attr' => [
+                'class' => 'c-btn'
+            ]
+
+        ])
+
+        ->add('captcha', CaptchaType::class,[
+            'attr' => [
+               
+                'class' => "form-control"
+            ],
+            ]
+        )
     ;
     }
 
@@ -50,6 +68,7 @@ class CommentsType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comments::class,
+            'parentComment' => null,
         ]);
     }
 }

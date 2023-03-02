@@ -131,9 +131,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	white-space: nowrap
 }
 body [class^="icon-"], body [class*=" icon-"] {
-	font-size: 14px;
-	line-height: 20px;
-	height: 20px
+	font-size: 10px;
+	line-height: 10px;
+	height: 10px
 }
 .shaded {
 	color: rgba(0,0,0,0.3);

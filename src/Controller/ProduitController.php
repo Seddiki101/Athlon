@@ -19,8 +19,9 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Psr\Log\LoggerInterface;
 use App\Form\CommentsType;
+use Doctrine\ORM\EntityManagerInterface;
 use DateTime;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -28,6 +29,12 @@ use DateTime;
  
 class ProduitController extends AbstractController
 {
+    private $entityManager;
+    #[Route('/manager', name: 'app_manager')]
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     #[Route('/Produit', name: 'app_Produit')]
     public function index(): Response
     {
@@ -79,8 +86,8 @@ class ProduitController extends AbstractController
         $comment->setParent($parent ?? null);
          $em->persist($comment);
          $em->flush();
-         $this->addFlash('message', 'Votre commentaire a bien été envoyé');
-            return $this->redirectToRoute('app_front');
+         $this->addFlash('message', 'Votre commentaire a été bien envoyé');
+            return $this->redirectToRoute('detaille', ['id' => $id]);
 
 
  }
@@ -103,7 +110,7 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/ProduitFront/afficher', name: 'app_front')]
-    public function afficheFront(ProduitRepository $annoncesRepo, Request $request): Response
+    public function afficheFront(ProduitRepository $annoncesRepo, Request $request,EntityManagerInterface $em): Response
     {
         // On définit le nombre d'éléments par page
         $limit = 3;
@@ -113,7 +120,17 @@ class ProduitController extends AbstractController
          ;
           // On récupère le nombre total d'annonces
         $total = $annoncesRepo->getTotalProduits();
-         return $this->render('produit/affichFront.html.twig', compact('Produit','total','limit','page'));
+
+
+       
+
+
+         return $this->render('produit/affichFront.html.twig',[
+            'Produit'=> $Produit,
+            'total'=> $total,
+            'limit' => $limit,
+            'page' =>$page 
+        ]);
        
     }
 
@@ -128,7 +145,7 @@ class ProduitController extends AbstractController
         $Produit=new Produit() ;
         $form=$this->createForm(ProduitType::class,$Produit); 
         $form->handleRequest($request);
-        if( $form->isSubmitted()  && $form->isValid()  )  { 
+        if( $form->isSubmitted()    )  { 
 
             $brochureFile = $form->get('image')->getData();
 
@@ -235,5 +252,37 @@ class ProduitController extends AbstractController
         ]);
     }
 
+    #[Route('/filtreP', name: 'app_filtre')]
    
+    public function filterByPrice(Request $request,ProduitRepository $annoncesRepo,EntityManagerInterface $em): Response
+    {
+        $page = (int)$request->query->get("page", 1);
+        $limit = 2;
+        $total = $annoncesRepo->getTotalProduits();
+        $minPrix = $request->query->get('min_prix');
+        $maxPrix = $request->query->get('max_prix');
+        
+        $queryBuilder = $em->createQueryBuilder();
+        $queryBuilder
+        ->select('p')
+        ->from(Produit::class, 'p')
+        ->where('p.prix BETWEEN :min_prix AND :max_prix')
+        ->setParameter('min_prix', $minPrix)
+        ->setParameter('max_prix', $maxPrix);
+
+$query = $queryBuilder->getQuery();
+    dump($query); // Vérifier la requête SQL générée
+
+   dump( $Produit = $query->getResult());
+        
+        return $this->render('produit/affichFront.html.twig', [
+            'Produit'=> $Produit,
+            'total'=> $total,
+            'limit' => $limit,
+            'page' =>$page 
+        ]);
+    }
+
+   
+
 }
