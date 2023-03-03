@@ -60,6 +60,12 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Comments::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $likes = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $dislikes = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -177,6 +183,30 @@ class Produit
                 $comment->setProduits(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLikes(): ?int
+    {
+        return $this->likes;
+    }
+
+    public function setLikes(?int $likes): self
+    {
+        $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getDislikes(): ?int
+    {
+        return $this->dislikes;
+    }
+
+    public function setDislikes(?int $dislikes): self
+    {
+        $this->dislikes = $dislikes;
 
         return $this;
     }

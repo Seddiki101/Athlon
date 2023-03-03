@@ -34,7 +34,11 @@
 
 
                 
-
+<div class="btn-group">
+    <a href="{{ path('app_testfront_like', {'id': Produit.id, 'type': 'like'}) }}" class="btn btn-success"><i class="fa fa-thumbs-up"></i> Like</a>
+    <a href="{{ path('app_testfront_like', {'id': Produit.id, 'type': 'dislike'}) }}" class="btn btn-danger"><i class="fa fa-thumbs-down"></i> Dislike</a>
+    <div class="text-muted mb-2">{{ Produit.likes }}   {{ Produit.dislikes }} </div>
+                </div>
 
 
 
@@ -80,11 +84,12 @@
                     <div id="editor"></div>
 
 				{{ form_end(commentForm) }}
-				
+				  
 			</div>
 		</div>
 	</div>
-                </div>
+
+    
                     
                       <a href="{{ path('app_front') }}"> <--Retourner à la liste des produits</a>
             </div>

@@ -16,6 +16,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Psr\Log\LoggerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 
 class CategorieController extends AbstractController
@@ -165,7 +166,6 @@ class CategorieController extends AbstractController
         return $this->redirectToRoute('afficherCat');
     }
    
-
-
+  
     
 }

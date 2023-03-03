@@ -113,7 +113,7 @@ class ProduitController extends AbstractController
     public function afficheFront(ProduitRepository $annoncesRepo, Request $request,EntityManagerInterface $em): Response
     {
         // On définit le nombre d'éléments par page
-        $limit = 3;
+        $limit = 2;
          // On récupère le numéro de page
          $page = (int)$request->query->get("page", 1);
          $Produit = $annoncesRepo->getPaginatedAnnonces($page, $limit)
@@ -122,10 +122,7 @@ class ProduitController extends AbstractController
         $total = $annoncesRepo->getTotalProduits();
 
 
-       
-
-
-         return $this->render('produit/affichFront.html.twig',[
+    return $this->render('produit/affichFront.html.twig',[
             'Produit'=> $Produit,
             'total'=> $total,
             'limit' => $limit,
@@ -134,11 +131,7 @@ class ProduitController extends AbstractController
        
     }
 
-    
-
-
-
-    #[Route('/Produit/add', name: 'ProduitAdd')]
+     #[Route('/Produit/add', name: 'ProduitAdd')]
     public function add(ManagerRegistry $doctrine,Request $request,SluggerInterface $slugger): Response
     
     {
@@ -252,12 +245,13 @@ class ProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/filtreP', name: 'app_filtre')]
+   /* #[Route('/filtreP', name: 'app_filtre')]
    
     public function filterByPrice(Request $request,ProduitRepository $annoncesRepo,EntityManagerInterface $em): Response
     {
         $page = (int)$request->query->get("page", 1);
         $limit = 2;
+        
         $total = $annoncesRepo->getTotalProduits();
         $minPrix = $request->query->get('min_prix');
         $maxPrix = $request->query->get('max_prix');
@@ -273,16 +267,51 @@ class ProduitController extends AbstractController
 $query = $queryBuilder->getQuery();
     dump($query); // Vérifier la requête SQL générée
 
-   dump( $Produit = $query->getResult());
-        
+    $Produit = $query->getResult();
+     
         return $this->render('produit/affichFront.html.twig', [
             'Produit'=> $Produit,
             'total'=> $total,
             'limit' => $limit,
             'page' =>$page 
         ]);
+      }  
+*/
+
+#[Route('/filtreP', name: 'app_filtre')]
+      public function filtre(ProduitRepository $productRepository ,Request $request)
+    {
+        $page = (int)$request->query->get("page", 1);
+        $limit = 2;
+        
+        $total = $productRepository ->getTotalProduits();
+        $minPrice = $request->query->get('min_price');
+        $maxPrice = $request->query->get('max_price');
+
+        $Produit = $productRepository->findByPriceRange($minPrice, $maxPrice);
+
+        return $this->render('produit/affichFront.html.twig', [
+            'Produit' => $Produit,
+            'total'=> $total,
+            'limit' => $limit,
+            'page' =>$page 
+        ]);
     }
 
+      #[Route("/like/{id}/{type}", name:"app_testfront_like")]
+ 
+public function like(Request $request, Produit $Produit, $type)
+{
+    if ($type == 'like') {
+        $Produit->setLikes($Produit->getLikes() + 1);
+    } else {
+        $Produit->setDislikes($Produit->getDislikes() + 1);
+    }
+
+    $this->getDoctrine()->getManager()->flush();
+
+    return $this->redirectToRoute('detaille', ['id' => $Produit->getId()]);
+}
    
 
 }

@@ -59,6 +59,17 @@ public function getTotalProduits($filters = null){
     return $query->getQuery()->getSingleScalarResult();
 }
 
+public function findByPriceRange($minPrice, $maxPrice)
+{
+    return $this->createQueryBuilder('p')
+        ->where('p.prix >= :minPrice')
+        ->andWhere('p.prix <= :maxPrice')
+        ->setParameter('minPrice', $minPrice)
+        ->setParameter('maxPrice', $maxPrice)
+        ->getQuery()
+        ->getResult();
+}
+
 //    /**
 //     * @return Produit[] Returns an array of Produit objects
 //     */
@@ -73,6 +84,19 @@ public function getTotalProduits($filters = null){
 //            ->getResult()
 //        ;
 //    }
+
+
+  /*  public function filtrePM($minPrix)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.prix > :minPrix')
+            ->setParameter('minPrix', $minPrix)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+*/
+
 
 //    public function findOneBySomeField($value): ?Produit
 //    {
