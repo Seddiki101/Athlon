@@ -113,7 +113,7 @@ class ProduitController extends AbstractController
     public function afficheFront(ProduitRepository $annoncesRepo, Request $request,EntityManagerInterface $em): Response
     {
         // On définit le nombre d'éléments par page
-        $limit = 2;
+        $limit = 3;
          // On récupère le numéro de page
          $page = (int)$request->query->get("page", 1);
          $Produit = $annoncesRepo->getPaginatedAnnonces($page, $limit)
