@@ -12,45 +12,60 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use SymfonyCasts\Bundle\VerifyEmail\Model\VerifyEmailSignatureComponents;
+
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+	
+
+	
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+	#[Groups("uzers")]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+	#[Groups("uzers")]
 	#[Assert\Email(message : "The email '{{ value }}' is not a valid email.",  )]
     private ?string $email = null;
 
     #[ORM\Column]
+	#[Groups("uzers")]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+	#[Groups("uzers")]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+	#[Groups("uzers")]
 	#[Assert\NotBlank(message : "Last name is required")]
 	#[Assert\Length(min :3 ,minMessage :"Last Name needs to have at least 3 characters")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+	#[Groups("uzers")]
 	#[Assert\NotBlank(message : "First name is required")]
 	#[Assert\Length(min :3 ,minMessage :"Name needs to have at least 3 characters")]
     private ?string $prenom = null;
 
     #[ORM\Column(nullable: true)]
+	#[Groups("uzers")]
 	#[Assert\Positive]
 	#[Assert\Length(min :8,max : 11,minMessage :"Votre Numero doit être au moins {{ limit }} characters long",maxMessage : "Votre Numero ne peut pas dépasser {{ limit }} characters")]
     private ?int $phone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+	#[Groups("uzers")]
     private ?string $adres = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -70,6 +85,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'userX', targetEntity: Reclamation::class)]
     private Collection $reclamationX;
+
+    #[ORM\Column(type:"string", length:50, nullable:true)]
+    private $reset_token;
 
     public function __construct()
     {
@@ -302,4 +320,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
+
+
+        
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(?string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+
+
+
+
+
+
 }

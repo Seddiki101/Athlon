@@ -172,4 +172,56 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	    #[Route('/', name: 'app_userSort_index', methods: ['GET'])]
+    public function sortName(UserRepository $userRepository): Response
+    {
+		
+			if (!$this->isGranted('ROLE_ADMIN')) {
+            // If not, redirect to a different page or display an error message
+            return $this->redirectToRoute('app_home');
+			}
+		
+		
+		$req = $em -> createQuery('select * from App\Entity\User order by nom ');
+		$pp = $req->getResult();
+		
+		
+        return $this->render('user/index.html.twig', [
+            'users' => $pp,
+        ]);
+		
+		
+		
+		//
+
+		//
+		
+		
+		
+		
+    }
+	
+	
+	
+	
+	
+	
+	
 }

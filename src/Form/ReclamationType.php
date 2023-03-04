@@ -9,6 +9,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+
+
 
 class ReclamationType extends AbstractType
 {
@@ -16,8 +19,19 @@ class ReclamationType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('desipticon', TextareaType::class)
+            //->add('desipticon', TextareaType::class)
+				
+			
+			->add('desipticon', CKEditorType::class, array(
+			'config' => array('uiColor' => '#ffffff',),    ))
+			
+			
 
+			
+			
+			
+			
+			
         ;
     }
 

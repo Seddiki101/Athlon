@@ -72,18 +72,13 @@
 				<div class="nav-collapse collapse navbar-inverse-collapse">
 				
 
-					<form class="navbar-search pull-left input-append" action="#">
-						<input type="text" class="span3">
-						<button class="btn" type="button">
-							<i class="icon-search"></i>
-						</button>
-					</form>
+
 				
 					<ul class="nav pull-right">
 						
 						
 						
-						
+					
 						
 						
 						
@@ -92,12 +87,13 @@
 						<li class="nav-user dropdown">
 							<a  class="dropdown-toggle" data-toggle="dropdown">
 								
-								<b class="caret"></b>
+								
 								{% if app.user %}
 								<img src="{{ asset('/media/' ~ app.user.imgUsr) }}?t={{ date().getTimestamp() }}" class="nav-avatar" />
 								{{ app.user.prenom }}
 								{% endif %}
 							</a>
+							
 							<ul class="dropdown-menu">
 								<li><a href="#">Your Profile</a></li>
 								<li><a href="#">Edit Profile</a></li>
