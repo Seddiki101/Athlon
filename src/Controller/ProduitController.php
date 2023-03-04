@@ -312,6 +312,43 @@ public function like(Request $request, Produit $Produit, $type)
 
     return $this->redirectToRoute('detaille', ['id' => $Produit->getId()]);
 }
-   
+
+
+
+
+#[Route('/stat', name: 'stat', methods: ['GET'])]
+    public function Produitstats(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $repository = $entityManager->getRepository(Produit::class);
+    
+        // Count total number of Produits
+        $totalProduits = $repository->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    
+        // Query for all RendezVouss and group them by Produit
+        $query = $repository->createQueryBuilder('c')
+            ->select('c.brand as brand, COUNT(c.id) as count, COUNT(c.id) / :total * 100 as percentage')
+            ->setParameter('total', $totalProduits)
+            ->groupBy('c.brand')
+            ->getQuery();
+    
+        $Produits = $query->getResult();
+    
+        
+    
+        // Calculate the counts array
+        $counts = [];
+        foreach ($Produits as $Produit) {
+            $counts[$Produit['brand']] = $Produit['count'];
+        }
+    
+        return $this->render('Produit/stats.html.twig', [
+            'Produits' => $Produits,
+            'counts' => $counts,
+        ]);
+    }
 
 }
