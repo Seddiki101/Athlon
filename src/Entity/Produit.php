@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
@@ -14,15 +15,18 @@ class Produit
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("Produit")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"veuillez remplir le champs")]
+    #[Groups("Produit")]
     private ?string $brand = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"veuillez remplir le champs")]
     #[Assert\Length(min:7,max:100, minMessage:"La descreption doit etre > 7.", maxMessage:"Doit etre <=100")]
+    #[Groups("Produit")]
     private ?string $description = null;
 
 
@@ -38,9 +42,11 @@ class Produit
          max : 99999999.99,
          
     )]
+    #[Groups("Produit")]
     private ?float $prix = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("Produit")]
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
@@ -50,15 +56,17 @@ class Produit
         pattern:"/^[^0-9]+$/",
         message:"Le nom ne doit pas contenir des chiffres"
     )]
+    #[Groups("Produit")]
     
     private ?string $nom = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[Assert\NotBlank(message:"veuillez remplir ce champs")]
+    #[Groups("Produit")]
     private ?Categorie $Categories = null;
 
     #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Comments::class, orphanRemoval: true)]
-    private Collection $comments;
+     private Collection $comments;
 
     #[ORM\Column(nullable: true)]
     private ?int $likes = null;
