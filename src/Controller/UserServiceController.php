@@ -30,6 +30,42 @@ class UserServiceController extends AbstractController
 	
 		///////////////////////////////////////////////////LOGIN////////////////////////////////////////////////////////////
 
+
+	#[Route("/signin", name: "app_service_login")]
+    public function siginAction(Request $request, NormalizerInterface $normalizer)
+    {
+        $Email = $request->query->get("email");
+        $Password = $request->query->get("password");
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy(['email' => $Email]);
+
+        if ($user) {
+            if ($Password == $user->getPassword()) {
+                $userlogin = $normalizer->normalize($user, 'json', ['groups' => "uzer"]);
+                $json = json_encode($userlogin);
+                return new JsonResponse($json);
+            } else {
+                return new Response("password not found", 500);
+            }
+        } 	else {
+            return new Response("user not found", 400);
+			}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
 	public function loginAction(Request $request)
     {
         $username = $request->query->get("username");
@@ -54,7 +90,7 @@ class UserServiceController extends AbstractController
 
     }
 	
-	
+	*/
 	
 	
 	
@@ -136,10 +172,8 @@ class UserServiceController extends AbstractController
 		//might need to encrypt it
 		$usr->setPassword( $req->get('password') );
 		 
-		 $user->setDateins(new \DateTime('now')) ;
-         $user->setRoles((["ROLE_USER"])) ;
-		
-		
+		 $usr->setDateins(new \DateTime('now')) ;
+         $usr->setRoles((["ROLE_USER"])) ;
 		
         $em->persist($usr);
         $em->flush();
