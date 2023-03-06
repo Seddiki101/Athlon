@@ -12,6 +12,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Knp\Bundle\SnappyBundle\Snappy\Response\SnappyResponse;
+use Knp\Snappy\Pdf;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
+
 #[Route('/user')]
 class UserController extends AbstractController
 {
@@ -192,35 +200,58 @@ class UserController extends AbstractController
 	    #[Route('/', name: 'app_userSort_index', methods: ['GET'])]
     public function sortName(UserRepository $userRepository): Response
     {
-		
 			if (!$this->isGranted('ROLE_ADMIN')) {
             // If not, redirect to a different page or display an error message
             return $this->redirectToRoute('app_home');
 			}
-		
-		
-		$req = $em -> createQuery('select * from App\Entity\User order by nom ');
-		$pp = $req->getResult();
-		
-		
-        return $this->render('user/index.html.twig', [
-            'users' => $pp,
-        ]);
-		
-		
-		
-		//
 
-		//
-		
-		
-		
-		
+        return $this->render('user/index.html.twig', [
+            'users' => $userRepository->findAllSortedByName(),
+        ]);
+
     }
-	
-	
-	
-	
+
+    #[Route('/user_pdf2', name: 'app_userPDF2', methods: ['GET'])]
+    public function productsPdfAction(UserRepository $userRepository)
+    {
+        return $this->render('user/userPDF.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/', name: 'app_userPDF', methods: ['GET'])]
+    public function downloadPdf(Pdf $snappy, UserRepository $userRepository): Response
+     //public function downloadPdf(Pdf $snappy, UserRepository $userRepository): SnappyResponse
+    {
+        // Generate the PDF content
+        $loader = new FilesystemLoader('../templates');
+        $twig = new Environment($loader);
+        $html = $twig->render('user/userPDF.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+
+        $pdfContent = $snappy->getOutputFromHtml($html);
+        /*
+        return new PdfResponse(
+            $pdfContent,
+            'document.pdf',
+            'application/pdf',
+            'inline' // or 'attachment' to force a download
+        );
+        */
+
+        //
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="'."userList".'.pdf"'
+            )
+        );
+
+
+    }
 	
 	
 	
