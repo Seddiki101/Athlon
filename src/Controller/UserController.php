@@ -16,6 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Bundle\SnappyBundle\Snappy\Response\SnappyResponse;
 use Knp\Snappy\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -211,36 +213,32 @@ class UserController extends AbstractController
 
     }
 
-    #[Route('/user_pdf2', name: 'app_userPDF2', methods: ['GET'])]
-    public function productsPdfAction(UserRepository $userRepository)
-    {
-        return $this->render('user/userPDF.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
 
-    #[Route('/', name: 'app_userPDF', methods: ['GET'])]
-    public function downloadPdf(Pdf $snappy, UserRepository $userRepository): Response
-     //public function downloadPdf(Pdf $snappy, UserRepository $userRepository): SnappyResponse
+
+
+    #[Route('/', name: 'app_userPDF2', methods: ['GET'])]
+    //public function downloadPdf(Pdf $snappy, UserRepository $userRepository): Response
+     public function downloadPdf(Knp\Snappy\Pdf $snappy, UserRepository $userRepository): SnappyResponse
     {
         // Generate the PDF content
         $loader = new FilesystemLoader('../templates');
         $twig = new Environment($loader);
-        $html = $twig->render('user/userPDF.html.twig', [
+        $html = $twig->renderView('user/userPDF.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
 
+      //  $snappy = $this->get('knp_snappy.pdf');
         $pdfContent = $snappy->getOutputFromHtml($html);
-        /*
+        //
         return new PdfResponse(
             $pdfContent,
             'document.pdf',
             'application/pdf',
             'inline' // or 'attachment' to force a download
         );
-        */
-
         //
+
+        /*
         return new Response(
             $snappy->getOutputFromHtml($html),
             200,
@@ -249,10 +247,71 @@ class UserController extends AbstractController
                 'Content-Disposition'   => 'attachment; filename="'."userList".'.pdf"'
             )
         );
-
+        */
 
     }
-	
+
+
+
+    #[Route('/', name: 'app_userPDF', methods: ['GET'])]
+    public function pdf(UserRepository $userRepository)
+    {
+
+          /*
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('user/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+        */
+
+
+
+
+
+
+
+
+
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $dompdf = new Dompdf($pdfOptions);
+        $html = $this->renderView('user/userPDF.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
+        ]);
+
+    }
 	
 	
 }
