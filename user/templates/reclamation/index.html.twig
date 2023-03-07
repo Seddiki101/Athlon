@@ -1,0 +1,129 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+
+
+
+
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">
+							<div class="container">	
+
+
+
+
+
+
+
+    <h1>Reclamation index</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+                                <script>
+                                    $(document).ready(function(){
+                                        $("#myInput").on("keyup", function() {
+                                            var value = $(this).val().toLowerCase();
+                                            $("#myTable tr").filter(function() {
+                                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                            });
+                                        });
+                                    });
+                                </script>
+
+
+                                <form class="d-flex align-items-center col-12 col-md-8 col-lg-3">
+               <span class="position-absolute pl-3 search-icon">
+                <i class="fe fe-search"></i>
+              </span>
+                                    <input type="search" id="myInput" class="form-control pl-6" placeholder="Search Client" />
+
+                                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <br/>
+<br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="myTable" >
+        {% for reclamation in reclamations %}
+            <tr>
+                <td>{{ reclamation.id }}</td>
+                <td>{{ reclamation.titre }}</td>
+                <td>{{ reclamation.desipticon }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_reclamation_show', {'id': reclamation.id}) }}">show</a>
+                    <a class="btn btn-danger" href="{{ path('app_reclamation_delete', {'id': reclamation.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+	
+	
+	
+	
+	
+	
+		
+									</div>
+								</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+	
+	
+	
+	
+	
+{% endblock %}
