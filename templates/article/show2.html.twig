@@ -1,0 +1,60 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">	
+
+    <h1>Article</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.titre }}</td>
+            </tr>
+            <tr>
+                <th>Auteur</th>
+                <td>{{ article.auteur }}</td>
+            </tr>
+            <tr>
+                <th>Descripton</th>
+                <td>{{ article.descripton }}</td>
+            </tr>
+            <tr>
+                <th>ImgArticle</th>
+               <td><img src="{{ asset('B/media/' ~ article.imgArticle) }}?t={{ date().getTimestamp() }}" alt="Sujet image"  width = "30%">  </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_article_index') }}">back to list</a>
+
+    <a href="{{ path('app_article_edit', {'id': article.id}) }}">edit</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+	
+	
+	
+	
+	
+	
+							</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+	
+	
+{% endblock %}

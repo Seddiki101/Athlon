@@ -1,0 +1,60 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Sujet{% endblock %}
+
+{% block body %}
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">	
+
+
+
+    <h1>Sujet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sujet.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ sujet.nom }}</td>
+            </tr>
+            <tr>
+                <th>Descr</th>
+                <td>{{ sujet.descr }}</td>
+            </tr>
+            <tr>
+                <th>ImgSujet</th>
+                <td><img src="{{ asset('B/media/' ~ sujet.imgSujet) }}?t={{ date().getTimestamp() }}" alt="Sujet image"  width = "30%">  </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sujet_index') }}">back to list</a>
+
+    <a href="{{ path('app_sujet_edit', {'id': sujet.id}) }}">edit</a>
+
+    {{ include('sujet/_delete_form.html.twig') }}
+	
+	
+	
+	
+	
+	
+	
+	
+							</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+	
+{% endblock %}

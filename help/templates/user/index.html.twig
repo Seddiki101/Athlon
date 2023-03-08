@@ -1,0 +1,238 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_ADMIN') %}
+
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">
+							<div class="container">	
+
+
+
+
+
+    <h1>User index</h1>
+
+
+
+
+
+
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+                                <script>
+                                    $(document).ready(function(){
+                                        $("#myInput").on("keyup", function() {
+                                            var value = $(this).val().toLowerCase();
+                                            $("#myTable tr").filter(function() {
+                                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                            });
+                                        });
+                                    });
+                                </script>
+
+
+                                <form class="d-flex align-items-center col-12 col-md-8 col-lg-3">
+               <span class="position-absolute pl-3 search-icon">
+                <i class="fe fe-search"></i>
+              </span>
+                                    <input type="search" id="myInput" class="form-control pl-6" placeholder="Search Client" />
+
+                                </form>
+
+
+
+                                <a class="btn btn-success" href="{{ path('app_user_new') }}">Create new</a>
+                                <br>
+                                <br>
+                                <a class="btn btn-success" href="{{ path('app_userPDF') }}"> Print </a>
+                                <br>
+                                <br/>
+
+
+
+    <table id="myTable2" class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th onclick="sortTable(0)" >Email ↨ </th>
+                <th>Roles</th>
+
+                <th onclick="sortTable(1)" >Nom ↨ </th>
+                <th onclick="sortTable(2)" >Prenom ↨ </th>
+                <th>Phone</th>
+                <th>Adres</th>
+                <th onclick="sortTable(3)" >Dateins ↨ </th>
+                <th>DateD</th>
+                <th>DateF</th>
+                <th>ImgUsr</th>
+                <th>IsVerified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody id="myTable" >
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.adres }}</td>
+                <td>{{ user.dateins ? user.dateins|date('Y-m-d') : '' }}</td>
+                <td>{{ user.dateD ? user.dateD|date('Y-m-d') : '' }}</td>
+                <td>{{ user.dateF ? user.dateF|date('Y-m-d') : '' }}</td>
+                
+				
+				
+				
+				  <td><img src="{{ asset('media/' ~ user.imgUsr ) }}?t={{ date().getTimestamp() }}" alt="user image"   width="50" height="50"
+                  title="Image D'utilisateur"></td>
+				
+				
+				
+				
+				
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a class="btn btn-success" href="{{ path('app_user_show2', {'id': user.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_user_edit2', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <script>
+                                    function sortTable(n) {
+                                        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                        table = document.getElementById("myTable2");
+                                        switching = true;
+                                        // Set the sorting direction to ascending:
+                                        dir = "asc";
+                                        /* Make a loop that will continue until
+                                        no switching has been done: */
+                                        while (switching) {
+                                            // Start by saying: no switching is done:
+                                            switching = false;
+                                            rows = table.rows;
+                                            /* Loop through all table rows (except the
+                                            first, which contains table headers): */
+                                            for (i = 1; i < (rows.length - 1); i++) {
+                                                // Start by saying there should be no switching:
+                                                shouldSwitch = false;
+                                                /* Get the two elements you want to compare,
+                                                one from current row and one from the next: */
+                                                x = rows[i].getElementsByTagName("TD")[n];
+                                                y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                /* Check if the two rows should switch place,
+                                                based on the direction, asc or desc: */
+                                                if (dir == "asc") {
+                                                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                        // If so, mark as a switch and break the loop:
+                                                        shouldSwitch = true;
+                                                        break;
+                                                    }
+                                                } else if (dir == "desc") {
+                                                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                        // If so, mark as a switch and break the loop:
+                                                        shouldSwitch = true;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            if (shouldSwitch) {
+                                                /* If a switch has been marked, make the switch
+                                                and mark that a switch has been done: */
+                                                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                switching = true;
+                                                // Each time a switch is done, increase this count by 1:
+                                                switchcount ++;
+                                            } else {
+                                                /* If no switching has been done AND the direction is "asc",
+                                                set the direction to "desc" and run the while loop again. */
+                                                if (switchcount == 0 && dir == "asc") {
+                                                    dir = "desc";
+                                                    switching = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+										</div>
+								</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+	
+	{% else %}
+
+
+	<h1> Login to see this page </h1>
+
+{% endif %}
+	
+	
+	
+	
+	
+{% endblock %}

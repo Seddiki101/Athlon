@@ -1,0 +1,81 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Sujet index{% endblock %}
+
+{% block body %}
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #004C99;} /* bord */
+.button2 {background-color: #000066;} /* Blue */
+.button3 {background-color: #99004C;} /* ahmer */
+</style>
+
+
+	<div class="wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+					<div class="content">	
+
+
+
+    <h1>Sujets</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Descr</th>
+                <th>ImgSujet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sujet in sujets %}
+            <tr>
+                <td>{{ sujet.id }}</td>
+                <td>{{ sujet.nom }}</td>
+                <td>{{ sujet.descr }}</td>
+                   <td><img src="{{ asset('B/media/' ~ sujet.imgSujet) }}?t={{ date().getTimestamp() }}" alt="Sujet image"  width = "30%">  </td>
+                
+                <td>
+                    <a href="{{ path('app_sujet_show', {'id': sujet.id}) }}"><button class="button button1">Afficher ou Supprimer</button></a>
+                    <a href="{{ path('app_sujet_edit', {'id': sujet.id}) }}"><button class="button button2">edit</button>
+</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sujet_new') }}"><button class="button button3">Ajouter Sujet</button>
+</a>
+	
+	
+	
+	
+	
+							</div><!--/.content-->
+				</div><!--/.span9-->
+			</div>
+		</div><!--/.container-->
+	</div><!--/.wrapper-->
+	
+	
+{% endblock %}

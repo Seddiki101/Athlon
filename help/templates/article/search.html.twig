@@ -1,0 +1,19 @@
+{% extends 'base4.html.twig' %}
+
+{% block content %}
+    <h1>Résultats de la recherche pour "{{ searchQuery }}"</h1>
+
+    {% if articles is empty %}
+        <p>Aucun résultat trouvé pour votre recherche.</p>
+    {% else %}
+        <ul>
+            {% for article in articles %}
+                <li>
+                    <a href="{{ path('app_article_show', {'id': article.id}) }}">
+                        {{ article.titre }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

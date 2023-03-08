@@ -1,0 +1,23 @@
+{% extends 'base4.html.twig' %}
+
+{% block title %}Auteur ayant créé le plus d'articles{% endblock %}
+
+{% block body %}
+    <h1>Auteur ayant créé le plus d'articles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Auteur</th>
+                <th>Nombre d'articles</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stat in stats %}
+                <tr>
+                    <td>{{ article.auteur }}</td>
+                    <td>{{ stat.count }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
