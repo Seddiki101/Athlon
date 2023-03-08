@@ -78,14 +78,18 @@ class ProduitController extends AbstractController
     
     
     #[Route('/detaille/{id}', name: 'detaille')]
-    public function detaille($id,ManagerRegistry $mg, Produit $Produit, Request $request,LoggerInterface $logger): Response
+    public function detaille($id,ManagerRegistry $mg, Produit $Produit, Request $request,LoggerInterface $logger,BuilderInterface $customQrCodeBuilder): Response
     {
         $repo=$mg->getRepository(Produit::class);
         $resultat = $repo ->find($id);
         $logger->info("The array is: " . json_encode($resultat));
 
 
-        
+        $result = $customQrCodeBuilder
+            ->size(400)
+            ->margin(20)
+            ->build();
+        $response = new QrCodeResponse($result);
         
 
 
@@ -126,7 +130,9 @@ class ProduitController extends AbstractController
             'Produit' => $resultat,
             
             
-            'commentForm' => $commentForm->createView()
+            'commentForm' => $commentForm->createView(),
+             'qr'=>$response->getContent()
+
         ]);
     
 }
@@ -265,14 +271,24 @@ class ProduitController extends AbstractController
         return $this->redirectToRoute('afficher');
     }
 
-
+//filtre par categorie
     #[Route('/category/{id}', name: 'category_articles')]
-    public function articles(Categorie $category): Response
+    public function articles(Categorie $category,ProduitRepository $annoncesRepo, Request $request): Response
     {
         $articles = $category->getProduits();
+        $limit = 3;
+         // On récupère le numéro de page
+         $page = (int)$request->query->get("page", 1);
+         $Produit = $annoncesRepo->getPaginatedAnnonces($page, $limit)
+         ;
+          // On récupère le nombre total d'annonces
+        $total = $annoncesRepo->getTotalProduits();
         return $this->render('categorie/listeP.html.twig', [
             'category' => $category,
             'articles' => $articles,
+            'total'=> $total,
+            'limit' => $limit,
+            'page' =>$page 
         ]);
     }
 
@@ -359,7 +375,7 @@ public function like(Request $request, Produit $Produit, $type)
             ->getQuery()
             ->getSingleScalarResult();
     
-        // Query for all RendezVouss and group them by Produit
+        // Query for all Produits and group them by Produit
         $query = $repository->createQueryBuilder('c')
             ->select('c.brand as brand, COUNT(c.id) as count, COUNT(c.id) / :total * 100 as percentage')
             ->setParameter('total', $totalProduits)
@@ -502,11 +518,11 @@ public function updatejson(Request $req, $id, NormalizerInterface $Normalizer)
         return new Response("Produit deleted successfully" .json_encode ($jsonContent));
     }
 
-    #[Route('/qr-codes', name: 'app_qr_codes')]
+    /*#[Route('/qr-codes', name: 'app_qr_codes')]
     public function QRcode(UrlGeneratorInterface $urlGenerator): Response
     {
 
-        $id= 42;
+        $id= 4;
         $detailleUrl = $urlGenerator->generate('detaille', ['id' => $id], UrlGeneratorInterface::ABSOLUTE_URL);
       
         $writer = new PngWriter();
@@ -550,8 +566,39 @@ public function updatejson(Request $req, $id, NormalizerInterface $Normalizer)
             $label->setText('With Image')->setFont(new NotoSans(20))
         )->getDataUri();
  
-        return $this->render('produit/qr.html.twig',  $qrCodes) ;
+        return $this->render('produit/qr.html.twig',$qrCodes) ;
     }
-// ...
+// ...*/
+
+#[Route('/statistics', name: 'Produit_statistics')]
+public function statistics(ManagerRegistry $doctrine): Response {
+    $em = $doctrine->getManager();
+    $ProduitRepository = $em->getRepository(Produit::class);
+    
+
+
+    // Get the total number of Produits
+    $totalProduits = $ProduitRepository->createQueryBuilder('u')
+        ->select('COUNT(u.id)')
+        ->getQuery()
+        ->getSingleScalarResult();
+
+    // Get the number of Produits per role
+    $ProduitCategories = $ProduitRepository->createQueryBuilder('r')
+    ->join('r.Categories', 'c')
+    ->select('c.nom', 'COUNT(r.id) AS ProduitCount')
+    ->groupBy('c.nom')
+    ->getQuery()
+    ->getResult();
+
+    // ...rest of the code
+
+    return $this->render('produit/statistique.html.twig', [
+        'totalProduits' => $totalProduits,
+        'ProduitCategories' => $ProduitCategories
+       
+    ]);
+}
+
 }
 

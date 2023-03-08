@@ -20,8 +20,33 @@
                         <p class="short-details"> Marque : {{Produit.brand}}</p>
                         <p class="long-details"> Description : {{Produit.description}}</p>
                       <p class="short-details"> Prix : {{Produit.prix}}</p>
+                        {% set produit_id = Produit.id %}
+                 {% set Produit_nom = Produit.nom %}
+								{% set Produit_description = Produit.description %}
+							{% set Produit_prix = Produit.prix %}
+						{% set Produit_img = asset('uploads/produit' ~ Produit.image) %}
+
+
+
+
+{% set qrData = 'Nom du Produit: ' ~ Produit_nom ~ ' - Description: ' ~ Produit_description ~ ' - Image: ' ~ Produit_img %}      
+
+
+<td class="invert">
+    <img style="width: 100px" class="rounded mx-auto d-block" src="{{ qr_code_data_uri(qrData) }}" />
+</td>
+
+
+                        
+
+
+
+
+
+
+
                     </div>
-                     <a href="#" class="primary-btn">Acheter</a>
+                     <a href="#" class="primary-btn"> Acheter </a>
                 </div>
              
                 <div class="col-lg-6">
@@ -29,12 +54,11 @@
                          <img src="{{ asset('/uploads/produit/' ~ Produit.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "10%">
                            
                     </div>
+                    
                      </div>
-                     
-    
-
+                   
                       </div>
-
+{#<img src="{{ qrCodes['withImage'] }}" alt="QR code avec image">#}
 
                 
 <div class="btn-group">
@@ -49,7 +73,7 @@
 
 
 
- <a href="{{ path('app_qr_codes') }}"> <--scanner</a>
+ {#<a href="{{ path('app_qr_codes') }}"> <--scanner</a>#}
  
 
 
@@ -65,10 +89,11 @@
 				{% for comment in Produit.comments %}
 					{% if comment.parent == null %}
 					<h6> <p class="short-details">Commentaire de {{comment.nickname}}</p> </h6>
-          	 <p class="long-details">Publié le {{comment.createdAt|date("d/m/Y H:i") }}</p>
-					 <p class="long-details"> {{comment.content|raw}}</p>
+          
+					<h2> <p class="long-details"> {{comment.content|raw}}</p></h2>
+          <h6>  <p class="long-details">Publié le {{comment.createdAt|date("d/m/Y H:i") }}</p></h6>
 						
-						<p><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="c-btn">Répondre</a></p>
+						{#<p><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="c-btn">Répondre</a></p>#}
 
 
 
