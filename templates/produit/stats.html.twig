@@ -1,7 +1,7 @@
-{% extends 'baseB.html.twig' %}
+{#{% extends 'baseB.html.twig' %}
 {% block title %}Produit{% endblock %}
 
-{% block body %}
+{% block body %}#}
 
 <style>
     body {
@@ -24,7 +24,7 @@
 
         function drawPieChart() {
             var data = google.visualization.arrayToDataTable([
-                ['cours', 'Nombre d\'Coaching'],
+                ['cours', 'Nombre de produits'],
                 {% for cours, count in counts %}
                     ['{{ cours }}', {{ count }}],
                 {% endfor %}
@@ -40,10 +40,10 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
         }
-
+ 
         function drawBarChart() {
             var data = google.visualization.arrayToDataTable([
-                ['cours', 'Nombre d\'Coaching'],
+                ['cours', 'Nombre de produits'],
                 {% for cours, count in counts %}
                     ['{{ cours }}', {{ count }}],
                 {% endfor %}
@@ -63,4 +63,4 @@
             chart.draw(data, options);
         }
     </script>
-{% endblock %}
+{#{% endblock %}#}

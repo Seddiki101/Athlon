@@ -1,66 +1,32 @@
-{% extends 'baseB.html.twig' %}
 
-{% block body %}
-<div class="card-body">
-    <div class="table-responsive">
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-            <tbody>
-                <tr>
-                    <h1>Produit Statistics</h1>
-                    <p>Total number of Produits: {{ totalProduits }}</p>
-
-                    <h2>Nombre des Produit par Categories</h2>
-
-                    <canvas id="ProduitsPerRoleChart" style="width: 200px; height: 75px;"></canvas>
-
-                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                    <script>
-                        var noms = [];
-                        var ProduitCounts = [];
-                        {% for row in ProduitCategories %}
-                        var nom = '{{ row['nom'] }}';
-                        var ProduitCount = '{{ row["ProduitCount"] }}';
-                        // map role names to display names
-                        if (nom == 'Musculations') {
-                            nom = 'Musculations';
-                        } else if (nom =='Matériel du sport') {
-                            nom == 'Matériel du sport';
-                       
-                        noms.push(nom);
-                        ProduitCounts.push(ProduitCount);
-                        {% endfor %}
-                        var chartData = {
-                            labels: noms,
-                            datasets: [{
-                                label: 'Nombre des Produits',
-                                data: ProduitCounts,
-                                backgroundColor: 'rgba(54, 122, 235, 0.2)',
-                                borderColor: 'rgba(54, 162, 235, 1)',
-                                borderWidth: 1
-                            }]
-                        };}
-                        var chartOptions = {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        };
-                        var chart = new Chart('ProduitPerRoleChart', {
-                            type: 'bar',
-                            data: chartData,
-                            options: chartOptions
-                        });
-
-
-
-                        
-                    </script>
-                </tr>
-            </tbody>
-        </table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Total des produits</h4>
+      <p class="lead">{{ totalProduits }}</p>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Produits par catégorie</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Catégorie</th>
+            <th>Nombre de produits</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for categorie in ProduitCategories %}
+            <tr>
+              <td>{{ categorie.nom }}</td>
+              <td>  {{ categorie.ProduitCount }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
-{% endblock %}
+
+
