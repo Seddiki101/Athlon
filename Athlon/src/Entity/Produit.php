@@ -4,8 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=ProduitRepository::class)
@@ -17,13 +18,20 @@ class Produit
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $idP;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("post:read")
      */
     private $brand;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix;
 
 
     public function __construct()
@@ -31,10 +39,6 @@ class Produit
         $this->quantity = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getIdP(): ?int
     {
@@ -60,37 +64,21 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, CommandeItem>
-     */
-    public function getQuantity(): Collection
-    {
-        return $this->quantity;
-    }
 
-    public function addQuantity(CommandeItem $quantity): self
-    {
-        if (!$this->quantity->contains($quantity)) {
-            $this->quantity[] = $quantity;
-            $quantity->setProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuantity(CommandeItem $quantity): self
-    {
-        if ($this->quantity->removeElement($quantity)) {
-            // set the owning side to null (unless already changed)
-            if ($quantity->getProduit() === $this) {
-                $quantity->setProduit(null);
-            }
-        }
-
-        return $this;
-    }
     public function __toString()
     {
         return $this->getBrand();
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
     }
 }

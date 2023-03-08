@@ -21,13 +21,17 @@ class CommandeService
     {
 
         $commande->setStatue("placed");
+        if ($cartService->getTotal() > 100) {
+            $commande->setRemise(10);
+        }
         self::insertOrUpdate($commande, $entityManager);
         $cartService->clear();
         $newCommande = new \App\Entity\Commande();
         $newCommande->setUser($commande->getUser());
         $date = new \DateTime();
-        $date->setDate(2022, 10, 28);
+//        $date->setDate(2022, 10, 28);
         $newCommande->setDate($date);
+
         $entityManager->persist($newCommande);
         $entityManager->flush();
 

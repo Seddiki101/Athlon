@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+    <!-- Breadcrumb End -->
+
+    <!-- Gallery Section Begin -->
+    <section class="gallery-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="gallery-controls">
+                        <ul>
+                            <li class="active" data-filter="*">All GALLERY</li>
+                            <li data-filter=".crossfit">Crossfit</li>
+                            <li data-filter=".workout">Workout</li>
+                            <li data-filter=".gym">GYM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row gallery-filter">
+
+
+
+                <div class="col-4" {% for c in produit  %} >
+                    <div class="gallery-item">
+                        <img src="img/gallery/gallery-1.jpg" alt="">
+                        <div class="gi-hover-warp">
+                            <div class="gi-hover">
+
+                                <a type="button" class="btn btn-danger" href="{{path('addProduitToPanier',{id:c.id})}}">++</a>
+                                <h6>Time to Try a Bodyweight Workout <span>Run, Walk, Swimming</span></h6>
+                            </div>
+                        </div>
+
+
+                    </div {% endfor %} >
+
+
+
+
+                </div  >
+
+            </div>
+        </div>
+    </section>
+    <!-- Gallery Section End -->
+
+    <!-- Cta Section Begin -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cta-text">
+                        <h3>GeT Started Today</h3>
+                        <p>New student special! $30 unlimited Gym for the first week anh 50% of our member!</p>
+                    </div>
+                    <a href="#" class="primary-btn cta-btn">book now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

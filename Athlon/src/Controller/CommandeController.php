@@ -9,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Stripe\Checkout\Session;
+use Stripe\Stripe;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 /**
@@ -45,9 +48,36 @@ class CommandeController extends AbstractController
      */
     public function placeOrder(\App\Service\CartService1 $cartService, \App\Service\CommandeService $commandeService)
     {
-        $commandeService->placeOrder($cartService->getCurrentOrder(), $cartService, $this->getDoctrine()->getManager());
+        $total = $cartService->getTotal() * 1.12;
+        if ($total > 100) {
+            $total -= $total * 0.1;
+        }
+        $order = $cartService->getCurrentOrder();
+        $commandeService->placeOrder($order, $cartService, $this->getDoctrine()->getManager());
         $this->addFlash('success', 'commande order success');
-        return $this->redirectToRoute('cart');
+        Stripe::setApiKey('sk_test_51MhKLdGY9S3rG4mj8P7eGVlhU0cDcbWhEHP5oXwHIJ8daklUYUB1EvpCYg15esYjI2ZKf9ZiKTHHyTHqPNmMnTBr00ktQnjhji');
+
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'eur',
+                        'product_data' => [
+                            'name' => "test",
+                        ],
+                        'unit_amount' => $total * 100,
+                    ],
+                    'quantity' => 1,
+                ]
+            ],
+            'mode' => 'payment',
+            'success_url' => $this->generateUrl('mesCommande', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('cart', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        ]);
+
+        return $this->redirect($session->url, 303);
+
     }
 
     /**

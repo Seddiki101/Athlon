@@ -3,8 +3,26 @@
 {% block title %}Hello CommandeController!{% endblock %}
 
 {% block body %}
-    <a href="{{ path('app_commande_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
 
+    <a href="{{ path('app_commande_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
+    <form class="d-flex align-items-center col-12 col-md-8 col-lg-3">
+               <span class="position-absolute pl-3 search-icon">
+                <i class="fe fe-search"></i>
+              </span>
+        <input type="search" id="myInput" class="form-control pl-6" placeholder="Search Commande"/>
+
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
     <table class="table">
         <thead>
         <tr>
@@ -14,7 +32,7 @@
             <th>action</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="myTable">
         {% for commande in commandes %}
             <tr>
                 <td>{{ commande.user }}</td>

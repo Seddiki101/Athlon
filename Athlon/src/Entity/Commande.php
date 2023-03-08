@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -19,36 +20,48 @@ class Commande
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $idC;
 
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message="ce chanp est obligatoire")
+     * @Groups("post:read")
      */
     private $date;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="ce chanp est obligatoire")
+     * @Groups("post:read")
      */
     private $user;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="ce chanp est obligatoire")
+     * @Groups("post:read")
      */
     private $statue = 'pending';
 
     /**
      * @ORM\OneToMany(targetEntity=CommandeItem::class, mappedBy="commande")
+     * @Groups("post:read")
      */
     private $orderItem;
 
     /**
      * @ORM\OneToOne(targetEntity=Livraison::class, mappedBy="commande", cascade={"persist", "remove"})
+     * @Groups("post:read")
      */
     private $livraison;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Groups("post:read")
+     */
+    private $remise = 0;
 
     public function __construct()
     {
@@ -158,6 +171,18 @@ class Commande
         }
 
         $this->livraison = $livraison;
+
+        return $this;
+    }
+
+    public function getRemise(): ?float
+    {
+        return $this->remise;
+    }
+
+    public function setRemise(float $remise): self
+    {
+        $this->remise = $remise;
 
         return $this;
     }

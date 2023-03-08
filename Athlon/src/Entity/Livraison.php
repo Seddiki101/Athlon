@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 /**
@@ -16,6 +17,7 @@ class Livraison
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -23,11 +25,13 @@ class Livraison
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="ce champ est obligatoire",allowNull = false)
      * @Assert\NotNull
+     * @Groups("post:read")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("post:read")
      */
     private $date;
 
@@ -41,6 +45,7 @@ class Livraison
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("post:read")
      */
     private $confirmer = 0;
 
@@ -48,8 +53,14 @@ class Livraison
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank (message="ce champ est obligatoire")
      * @Assert\Email(message="valid email")
+     * @Groups("post:read")
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prix = 7;
 
 
     public function getId(): ?int
@@ -113,6 +124,18 @@ class Livraison
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPrix(): ?float
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(float $prix): self
+    {
+        $this->prix = $prix;
 
         return $this;
     }
