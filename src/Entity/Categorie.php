@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 
@@ -16,6 +17,7 @@ class Categorie
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("cat")]
     private ?int $id = null;
 
     
@@ -26,14 +28,16 @@ class Categorie
         pattern:"/^[^0-9]+$/",
         message:"Le nom ne doit pas contenir des chiffres"
     )]
+    #[Groups("cat")]
     private ?string $nom = null;
 
     
     #[ORM\Column(length: 255)]
-   
+    #[Groups("cat")]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'Categories', targetEntity: Produit::class)]
+    #[Groups("cat")]
     private Collection $produits;
 
     public function __construct()

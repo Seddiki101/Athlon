@@ -62,16 +62,18 @@ class Produit
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[Assert\NotBlank(message:"veuillez remplir ce champs")]
-    #[Groups("Produit")]
+    
     private ?Categorie $Categories = null;
 
     #[ORM\OneToMany(mappedBy: 'produits', targetEntity: Comments::class, orphanRemoval: true)]
      private Collection $comments;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("Produit")]
     private ?int $likes = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("Produit")]
     private ?int $dislikes = null;
 
     public function __construct()

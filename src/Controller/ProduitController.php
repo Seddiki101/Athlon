@@ -84,16 +84,12 @@ class ProduitController extends AbstractController
         $resultat = $repo ->find($id);
         $logger->info("The array is: " . json_encode($resultat));
 
-
         $result = $customQrCodeBuilder
             ->size(400)
             ->margin(20)
             ->build();
         $response = new QrCodeResponse($result);
         
-
-
-
         // Partie commentaires
         // On crée le commentaire "vierge"
         $comment = new Comments;
@@ -113,7 +109,7 @@ class ProduitController extends AbstractController
          // On va chercher le commentaire correspondant
          $em = $this->getDoctrine()->getManager();
          if($parentid != null){
-            $parent = $em->getRepository(Comments::class)->find($parentid);
+         $parent = $em->getRepository(Comments::class)->find($parentid);
         }
 
         // On définit le parent
@@ -292,38 +288,7 @@ class ProduitController extends AbstractController
         ]);
     }
 
-   /* #[Route('/filtreP', name: 'app_filtre')]
    
-    public function filterByPrice(Request $request,ProduitRepository $annoncesRepo,EntityManagerInterface $em): Response
-    {
-        $page = (int)$request->query->get("page", 1);
-        $limit = 2;
-        
-        $total = $annoncesRepo->getTotalProduits();
-        $minPrix = $request->query->get('min_prix');
-        $maxPrix = $request->query->get('max_prix');
-        
-        $queryBuilder = $em->createQueryBuilder();
-        $queryBuilder
-        ->select('p')
-        ->from(Produit::class, 'p')
-        ->where('p.prix BETWEEN :min_prix AND :max_prix')
-        ->setParameter('min_prix', $minPrix)
-        ->setParameter('max_prix', $maxPrix);
-
-$query = $queryBuilder->getQuery();
-    dump($query); // Vérifier la requête SQL générée
-
-    $Produit = $query->getResult();
-     
-        return $this->render('produit/affichFront.html.twig', [
-            'Produit'=> $Produit,
-            'total'=> $total,
-            'limit' => $limit,
-            'page' =>$page 
-        ]);
-      }  
-*/
 
 #[Route('/filtreP', name: 'app_filtre')]
       public function filtre(ProduitRepository $productRepository ,Request $request)
@@ -593,7 +558,7 @@ public function statistics(ManagerRegistry $doctrine): Response {
 
     // ...rest of the code
 
-    return $this->render('produit/statistique.html.twig', [
+    return $this->render('categorie/statistique.html.twig', [
         'totalProduits' => $totalProduits,
         'ProduitCategories' => $ProduitCategories
        
