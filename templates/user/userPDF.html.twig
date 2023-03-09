@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+
+<table id="myTable2" class="table">
+    <thead>
+    <tr>
+
+        <th  >Email  </th>
+        <th >Nom  </th>
+        <th >Prenom  </th>
+        <th>Phone</th>
+        <th>Adres</th>
+        <th >Dateins  </th>
+
+
+    </tr>
+    </thead>
+	
+    <tbody id="myTable" >
+    {% for user in users %}
+        <tr>
+
+            <td>{{ user.email }}</td>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.adres }}</td>
+            <td>{{ user.dateins ? user.dateins|date('Y-m-d') : '' }}</td>
+
+        </tr>
+
+    </tbody>
+</table>
+
+
+</body>
+</html>
