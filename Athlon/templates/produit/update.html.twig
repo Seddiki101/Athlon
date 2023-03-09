@@ -1,0 +1,35 @@
+
+{% extends 'baseB.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+<div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    
+                    <p class="card-description"> Ajouter un produit </p>
+                    {{ form_start(formProduit , {'attr': {'novalidate':'novalidate'}} ) }}
+                    <form class="forms-sample">
+					<div class="form-group">
+                        {{ form_row(formProduit.nom, {'label':'nom' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                      <div class="form-group">
+                      {{ form_row(formProduit.brand, {'label':'brand' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+						<div class="form-group">
+                        {{ form_row(formProduit.description, {'label':' description' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+						<div class="form-group">
+                        {{ form_row(formProduit.prix, {'label':'prix' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+						<div class="form-group">
+                        {{ form_row(formProduit.image, {'label':'image' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+					
+						
+                      
+					 
+                     
+                      
+                    </form>
+                     
+                    </div>
+                </div>
+            </div>
+			  {%endblock%}

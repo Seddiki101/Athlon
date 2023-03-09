@@ -1,0 +1,121 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+ 
+{% block body %}
+ 
+ 
+
+ <section class="trainer-section spad">
+        <div class="container">
+        
+            <div class="row">
+                <div class="col-lg-12">
+                <form method="get" action="{{ path('app_filtre') }}">
+      
+      <input type="number" name="min_price" id="min_price"  placeholder="Entrez le prix minimum" value="{{ app.request.query.get('min_price') }} ">
+      
+
+        
+        <input type="number" name="max_price"  placeholder="Entrez le prix maximum" id="max_price" value="{{ app.request.query.get('max_price') }}">
+        <br>
+
+        <button class="primary-btn price-btn">Filter</button>
+    </form>
+                    <div class="section-title">
+                        <h2>NOS PRODUITS |  <a href="{{ path('afficherFrontCat') }}">Catégorie</a> </h2>
+                      
+                     
+                    </div>
+                </div>
+            </div>
+
+             
+ </div>
+            <div class="row">
+            
+             {% for i in Produit %}
+                <div class="col-lg-3 col-sm-6">
+                
+                    <div class="trainer-item">
+                        <div class="ti-pic">
+                            <img src="{{ asset('/media/' ~ i.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "10%">
+                           
+                            <div class="trainer-text">
+                                <h5>{{i.nom}}</h5>
+                                <h6> <span>{{i.prix}} dt</span></h6>
+                               <span> <i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i>
+													<i class="fa fa-star"></i></span>
+                                                
+                            </div>
+                            
+                         
+                        </div>
+                           <br/>   
+                    </div>
+                     <a href="{{ path('detaille' ,{id:i.id}) }}" class="primary-btn f-btn">Read More</a>
+                    <a href="{{ path('cart_add',{id:i.id}) }}" class="primary-btn f-btn">ajouter Panier</a>
+
+                </div>
+              
+                  {% endfor%}
+ </div>
+ 
+  <div class="blog-pagination">
+                  <class="{{( page == 1) ? 'disabled' : ''}}">
+                  <a href="?page = 1">
+                  <i class="fa fa-step-backward"></i>
+                  </a>
+                    {% set pages = (total / limit)| round(0, 'ceil')%}
+                  <class="{{(page == 1) ? 'disabled' : ''}}">
+                  <a href="{{ (page > 1)  ? '?page=' ~ (page - 1) : '' }} ">
+                    <i class="fa fa-long-arrow-left"></i>
+                  </a>
+
+                 
+                  {% set pages = (total / limit)| round(0, 'ceil')%}
+                  {% for item in 1..pages%}
+
+                 <class="{{ (page == item) ? 'active' : '' }}">
+                 <a href="?page={{item}}">{{item}}</a>
+                 
+                  {% endfor %}
+                  <class="{{(page == pages) ? 'disabled' : ''}}">
+                  <a href="{{ (page < pages)  ? '?page=' ~ (page + 1) : '' }} ">
+                    <i class="fa fa-long-arrow-right"></i>
+                  </a>
+
+                 
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+         
+    
+
+
+
+
+  
+		
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+

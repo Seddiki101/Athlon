@@ -3,31 +3,41 @@
 {% block title %}Edit Article{% endblock %}
 
 {% block body %}
+<style>
+  .centered-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
 
-	<div class="wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="span9">
-					<div class="content">	
+  }
+</style>
+
+<div class="centered-text">
+
+	<div class="container">
+        <div class="row">
+            <div class="col-md-1 offset-md-10">
+		
 
     <h1>Edit Article</h1>
 
     {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
-
+ {{ include('article/_delete_form.html.twig') }}
     <a href="{{ path('app_article_index') }}">back to list</a>
 
-    {{ include('article/_delete_form.html.twig') }}
+   
 	
 	
-	
-	
-	
-	
-							</div><!--/.content-->
-				</div><!--/.span9-->
+			</div><!--/.span9-->
 			</div>
 		</div><!--/.container-->
 	</div><!--/.wrapper-->
-	
+	</div>
 	
 {% endblock %}
+

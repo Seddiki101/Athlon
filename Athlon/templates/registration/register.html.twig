@@ -3,22 +3,93 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+
+<style>
+.error-message{
+   color: red;
+}
+</style>
+
+   <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-2">
+				
+					 
+					 	 <div class="contact-form">
+
+					 
+
+
+
+
+
+
+
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+
+	<div class="contact-form">
+    <h4>Register</h4>
+	<br/>
+	<br/>
+
+
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.phone) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+	
+		    
+			
+			{{ form_label(registrationForm.nom,"Nom",{'label_attr': {'style': 'color: white;' }}) }} 
+			{{ form_widget(registrationForm.nom) }}
+			<li class="error-message">
+			{{ form_errors(registrationForm.nom) }} 
+			</li>
 
-        <button type="submit" class="btn">Register</button>
+			{{ form_label(registrationForm.prenom,"Prenom",{'label_attr': {'style': 'color: white;' }}) }} 
+			{{ form_widget(registrationForm.prenom) }}
+			<li class="error-message">
+			{{ form_errors(registrationForm.prenom) }}  
+			</li>	
+				
+			{{ form_label(registrationForm.email,"Email",{'label_attr': {'style': 'color: white;' }}) }} 
+			{{ form_widget(registrationForm.email) }}    
+			<li class="error-message">
+			{{ form_errors(registrationForm.email) }} 				
+				</li>
+				
+				
+			{{ form_label(registrationForm.plainPassword,"Password",{'label_attr': {'style': 'color: white;' }}) }} 
+			{{ form_widget(registrationForm.plainPassword) }}
+			<li class="error-message">			
+			{{ form_errors(registrationForm.plainPassword) }} 		
+			</li>
+				
+		
+		{{ form_label(registrationForm.agreeTerms,"Agree to Terms",{'label_attr': {'style': 'color: white;' }}) }} 
+		{{ form_widget(registrationForm.agreeTerms) }}    
+			{{ form_errors(registrationForm.agreeTerms) }} 	
+        
+
+        <button type="submit" class="c-btn ">Register</button>
+		
     {{ form_end(registrationForm) }}
+	
+	
+	
+	
+	
+	
+	
+			</div>
+          </div>
+        </div>
+		</div>
+
+	
+	
+	
+	
 {% endblock %}

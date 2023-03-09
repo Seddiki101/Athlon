@@ -1,0 +1,21 @@
+composer require symfonycasts/verify-email-bundle
+composer require symfony/mailer
+composer require symfony/google-mailer
+composer require dompdf/dompdf
+
+composer require stripe/stripe-php
+composer require endroid/qr-code-bundle
+//
+composer require knplabs/knp-paginator-bundle
+composer require gregwar/captcha-bundle:^2.2.*
+
+
+
+
+
+
+current user
+needs to have id in commande
+
+email w nom
+add comment produiot

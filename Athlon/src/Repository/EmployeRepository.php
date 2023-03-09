@@ -38,7 +38,54 @@ class EmployeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+     public function findAllSortedByName()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.nom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findAllSortedByName2()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.prenom', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findAllSortedBySalaire()
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.salaire', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    public function findByCin($cin)
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.cin = :cin')
+            ->setParameter('cin', $cin)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function countBySalaryGreaterThan($amount)
+{
+    $qb = $this->createQueryBuilder('e');
+    $qb->select('COUNT(e.id)')
+       ->where('e.salaire > :amount')
+       ->setParameter('amount', $amount);
 
+    return $qb->getQuery()->getSingleScalarResult();
+}
+public function countBySalaryLessThanOrEqual($amount)
+{
+    $qb = $this->createQueryBuilder('e');
+    $qb->select('COUNT(e.id)')
+       ->where('e.salaire <= :amount')
+       ->setParameter('amount', $amount);
+
+    return $qb->getQuery()->getSingleScalarResult();
+}
 //    /**
 //     * @return Employe[] Returns an array of Employe objects
 //     */

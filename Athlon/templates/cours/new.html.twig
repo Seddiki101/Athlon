@@ -1,0 +1,84 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Cours{% endblock %}
+
+{% block body %}
+
+    <style>
+
+        .centered-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            position: absolute;
+            top: 57%;
+            left: 57%;
+            transform: translate(-50%, -50%);
+
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+        }
+        .btn2 {
+            display: inline-block;
+            padding: 9px 80px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            margin: 4px 30px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Button hover style */
+        .btn2:hover {
+            background-color: #0062cc;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button active style */
+        .btn2:active {
+            background-color: #005cbf;
+            box-shadow: none;
+        }
+
+        /* Button disabled style */
+        .btn2:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-right: 140px;
+            margin-left: 50px; /* Ajouter une marge gauche */
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 10;
+            font-size: 2rem;
+            color: black;
+        }
+    </style>
+
+    <h1>Ajouter Cour</h1>
+
+    <div class="centered-text">
+
+        <div class="btn-container">
+            {{ include('cours/_form.html.twig') }}
+            <a href="{{ path('app_cours_index') }}"><button class="btn2">Back</button></a>
+        </div>
+
+    </div>
+
+{% endblock %}

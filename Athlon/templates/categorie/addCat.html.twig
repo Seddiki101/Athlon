@@ -1,0 +1,34 @@
+
+{% extends 'baseB.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block body %}
+<div class="span9">
+<div class="content">
+
+						<div class="module">
+							<div class="module-head">
+								<h3>Ajouter une catégorie</h3>
+							</div>
+                    {{ form_start(formCategorie , {'attr': {'novalidate':'novalidate'}} ) }}
+                    <form class="forms-sample">
+					<div class="form-group">
+                        {{ form_row(formCategorie.nom, {'label':'Nom :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+                     
+						<div class="form-group">
+                        {{ form_row(formCategorie.image, {'label':'Image :' ,'attr':{'placeholder': 'Type something here…', 'class':'form-control'}}) }}</div>
+					
+						
+                      
+					 
+                      <button type="submit" class="btn btn-primary mr-2" >Ajouter</button> <span><a href="{{ path('afficherCat') }}" class="btn btn-primary mr-2">Annuler</a>
+                      
+                    </form>
+                    </br>
+              
+                    </div>
+                </div>
+                 {{ form_end(formCategorie) }}
+            </div>
+			  {%endblock%}

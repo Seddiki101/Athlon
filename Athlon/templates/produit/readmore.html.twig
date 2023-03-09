@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+
+{%  for message in app.flashes('message')  %}
+ <div class="alert alert-info" role="alert">
+ {{message}}                               </div>
+                           {% endfor %}
+
+ <!-- About Section Begin -->
+    <section class="home-about spad">
+        <div class="container">
+       <div class="row">
+              <div class="col-lg-6">
+                    <div class="about-text">
+                     <h1> <p class="short-details"> {{Produit.nom}}  </p> </h1>
+                        <p class="short-details"> Catégorie : {{Produit.Categories}}</p>
+                        <p class="short-details"> Marque : {{Produit.brand}}</p>
+                        <p class="long-details"> Description : {{Produit.description}}</p>
+                      <p class="short-details"> Prix : {{Produit.prix}}</p>
+                        
+
+                        
+
+
+
+
+
+
+
+                    </div>
+                     <a href="#" class="primary-btn"> Acheter </a>
+                </div>
+             
+                <div class="col-lg-6">
+                    <div class="about-img">
+                         <img src="{{ asset('/media/' ~ Produit.image) }}?t={{ date().getTimestamp() }}" alt="image"  width = "10%">
+                           
+                    </div>
+                    
+                     </div>
+                   
+                      </div>
+
+
+                
+<div class="btn-group">
+    <a href="{{ path('app_testfront_like', {'id': Produit.id, 'type': 'like'}) }}" class="btn btn-success"><i class="fa fa-thumbs-up"></i> Like</a>
+    <a href="{{ path('app_testfront_like', {'id': Produit.id, 'type': 'dislike'}) }}" class="btn btn-danger"><i class="fa fa-thumbs-down"></i> Dislike</a>
+      </div>
+    <div class="text-muted mb-2">{{ Produit.likes }} likes / {{ Produit.dislikes }} dislikes</div>
+
+
+  </div>
+    </div>
+
+
+
+ {#<a href="{{ path('app_qr_codes') }}"> <--scanner</a>#}
+ 
+
+
+ 
+
+
+ <section class="home-about spad">
+        <div class="container">
+       <div class="row">
+              <div class="col-lg-6">
+                    <div class="about-text">
+                     <h2> <p class="short-details">  Les commentaires  </p> </h2>
+				{% for comment in Produit.comments %}
+					{% if comment.parent == null %}
+					<h6> <p class="short-details">Commentaire de {{comment.nickname}}</p> </h6>
+          
+					<h2> <p class="long-details"> {{comment.content|raw}}</p></h2>
+          <h6>  <p class="long-details">Publié le {{comment.createdAt|date("d/m/Y H:i") }}</p></h6>
+						
+						{#<p><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="c-btn">Répondre</a></p>#}
+
+
+
+
+						{# On affiche les réponses #}
+						{% for reply in comment.replies %}
+							<p>Réponse publiée par {{reply.nickname}} le {{reply.createdAt|date("d/m/Y H:i") }}</p>
+							<div>{{reply.content|raw}}</div>
+                            
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			</div>
+			</div>
+			
+			<div class="col-lg-8 offset-lg-1">
+                    <div class="contact-form">
+					<div>
+                        <h4>Ecrire un commentaire</h4>
+				{{ form_start(commentForm, {'attr': {'novalidate':'novalidate'}}) }}
+				    {{ form_row(commentForm.email,{'attr':{'placeholder': 'Email'}})  }}
+				    {{ form_row(commentForm.nickname,{'attr':{'placeholder': 'Nom'}})  }}
+                    {{ form_row(commentForm.content,{'attr':{'placeholder': 'Commentaire'}})  }}
+
+                    <div id="editor"></div>
+
+				{{ form_end(commentForm) }}
+				  
+			</div>
+		</div>
+	</div>
+
+    
+                    
+                      <a href="{{ path('app_front') }}"> <--Retourner à la liste des produits</a>
+            </div>
+      
+        </div>
+    </section>
+    <!-- About Section End -->
+    {% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+
+

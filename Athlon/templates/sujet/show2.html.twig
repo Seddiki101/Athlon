@@ -31,7 +31,7 @@
             </tr>
             <tr>
                 <th>ImgSujet</th>
-                <td>{{ sujet.imgSujet }}</td>
+                <td><img src="{{ asset('B/media/' ~ sujet.imgSujet) }}?t={{ date().getTimestamp() }}" alt="Sujet image"  width = "30%">  </td>
             </tr>
         </tbody>
     </table>

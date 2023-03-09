@@ -1,0 +1,52 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Cours{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span9">
+                <div class="content">
+    <h1>Cours</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cour.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ cour.Nom }}</td>
+            </tr>
+            <tr>
+                <th>Description_cours</th>
+                <td>{{ cour.descriptionCours }}</td>
+            </tr>
+            <tr>
+                <th>Niveau_cours</th>
+                <td>{{ cour.NiveauCours }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ cour.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Duree_cours</th>
+                <td>{{ cour.dureeCours }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cours_index') }}"><button class="btn">Back</button></a></a>
+
+    <a href="{{ path('app_cours_edit', {'id': cour.id}) }}"><button class="btn">EDIT</button></a></a>
+
+    {{ include('cours/_delete_form.html.twig') }}
+                </div><!--/.content-->
+            </div><!--/.span9-->
+        </div>
+    </div><!--/.container-->
+</div><!--/.wrapper-->
+{% endblock %}

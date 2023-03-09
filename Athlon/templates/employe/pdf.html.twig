@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employe List</title>
+</head>
+<body>
+
+<table id="myTable2" class="table">
+    <thead>
+    <tr>
+                <th>Id</th>
+                <th>Cin</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                 <th>Salaire</th>
+                  <th>Etat</th>
+                <th>Image de l'employe</th>
+               
+            </tr>
+    </thead>
+     <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.id }}</td>
+                <td>{{ employe.cin }}</td>
+                <td>{{ employe.nom }}</td>
+                <td>{{ employe.prenom }}</td>
+                <td>{{ employe.salaire }}</td>
+                 <td>{{ employe.etat }}</td>
+                <td><img src="{{ absolute_url('/media/' ~ employe.imgEmploye) }}?t={{ date().getTimestamp() }}" alt="Employe image" width="70" height="50" title="Image D'employe" style="border-radius: 10%">
+
+
+
+
+</td>
+               
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+</table>
+
+
+</body>
+</html>

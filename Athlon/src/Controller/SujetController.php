@@ -29,6 +29,21 @@ class SujetController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $form->get('imgSujet')->getData();
+
+            if ($file) {
+                $fileName = uniqid().'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('media'),
+                    $fileName
+                );
+                $sujet->setImgSujet($fileName);
+            }
+
+
+
+
             $sujetRepository->save($sujet, true);
 
             return $this->redirectToRoute('app_sujet_index', [], Response::HTTP_SEE_OTHER);
@@ -55,6 +70,18 @@ class SujetController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $form->get('imgSujet')->getData();
+
+            if ($file) {
+                $fileName = uniqid().'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('media'),
+                    $fileName
+                );
+                $sujet->setImgSujet($fileName);
+            }
+            
             $sujetRepository->save($sujet, true);
 
             return $this->redirectToRoute('app_sujet_index', [], Response::HTTP_SEE_OTHER);

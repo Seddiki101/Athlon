@@ -1,58 +1,295 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/elegant-icons.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/slicknav.min.css') }}" type="text/css">
-            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" type="text/css">
-        {% endblock %}
+<html lang="zxx">
 
-        {% block javascripts %}
-            <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-            <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.magnific-popup.min.js') }}"></script>
-            <script src="{{ asset('assets/js/mixitup.min.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
-            <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
-            <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-            <script src="{{ asset('assets/js/masonry.pkgd.min.js') }}"></script>
-            <script src="{{ asset('assets/js/main.js') }}"></script>
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		{% endblock %}
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Activitar Template">
+    <meta name="keywords" content="Activitar, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Activitar | Template {% endblock %} </title>
+
+    <!-- Google Font -->
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800,900&display=swap')}}" rel="stylesheet">
+    <link href="{{asset('https://fonts.googleapis.com/css?family=Oswald:300,400,500,600,700&display=swap')}}" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{{ asset('/F/css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/magnific-popup.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('/F/css/style.css') }}" type="text/css">
+</head>
+
+<body>
+  
+
+    <!-- Header Section Begin -->
+    <header class="header-section header-normal">
+        <div class="container-fluid">
+            <div class="logo">
+                <a href="{{  path('app_home')   }}">
+                    <img src="{{asset('/F/img/logo.png')}}" alt="">
+                </a>
+            </div>
+               <div class="top-social">
+			{% if app.user %}
+                <a href="{{ path('app_user_show', {'id': app.user.id}) }} ">  <i class="fa fa-user"></i>  hello {{ app.user.prenom }}  </a>
+				<img src="{{ asset('/media/' ~ app.user.imgUsr) }}?t={{ date().getTimestamp() }}" alt=""   width="50" height="50"  style="border-radius: 60%"
+                  title="">
+				
+				
+				{% endif %}
+            </div>
+            <div class="container">
+                <div class="nav-menu">
+                    <nav class="mainmenu mobile-menu">
+                        <ul>
+                            <li><a href="{{  path('app_home')   }}">Home</a></li>
+                           <li><a href="{{  path('app_front')   }}">SHOP</a></li>
+                            <li><a href="{{  path('list_cours')   }}">Courses</a></li>
+                            <li><a href="{{  path('app_testfront')   }}">Articles</a></li>
+							<li><a href="{{  path('app_employe_index')   }}">Coaches</a></li>
+                            <li><a href="{{  path('app_employe_index')   }}">Commandes </a></li>
+                            <li><a href="">Gallery</a></li>
+                            <li><a href="">Blog</a>
+                                <ul class="dropdown">
+                                    <li><a href="">About Us</a></li>
+                                    <li><a href="">Blog Details</a></li>
+                                </ul>
+                            </li>
+                              <li>      <a href="#">             Account </a>
+                                <ul class="dropdown">
+								
+									
+									{% if app.user  == false %}
+                                    <li><a href="{{ path('app_login') }}">Sign in	<i class="fa fa-sign-in" aria-hidden="true"></i> </a></li>
+                                    <li><a href="{{ path('app_register') }}">Sign up  <i class="fa fa-id-card" aria-hidden="true"></i>  </a></li>
+									{% endif %}
+									
+									
+									    {% if app.user %}
+										<li>   <a href="{{ path('app_logout') }}"   class="primary-btn price-btn" > Logout 
+										<i class="fa fa-sign-out" aria-hidden="true"></i> </a>     
+										</li>
+
+										<li> <a href=""   > Cart <i class="fa fa-cart-plus"></i> </a>  </li>
+										<li> <a href="{{ path('app_reclamation_new') }}"   > Reclamation 	<i class="fa fa-bullhorn" ></i> </a>  </li>
+										
+										{% endif %}
+									
+									
+									
+									
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div id="mobile-menu-wrap"></div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section set-bg spad" data-setbg="{{asset('/F/img/about-bread.jpg')}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Bienvenue</h2>
+                        <div class="breadcrumb-controls">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb End -->
+{% block body %}
+    
+    <!-- Trainer Section Begin -->
+    <section class="trainer-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>OUR Trainer</h2>
+                        <p>Our Crossfit experts can help you discover new training techniques.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="trainer-item">
+                        <div class="ti-pic">
+                            <img src="{{asset('/F/img/trainer/trainer-1.jpg')}}" alt="">
+                            <div class="ti-links">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            <div class="trainer-text">
+                                <h5>Becky Taylor <span>- Gymer</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="trainer-item">
+                        <div class="ti-pic">
+                            <img src="{{asset('/F/img/trainer/trainer-2.jpg')}}" alt="">
+                            <div class="ti-links">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                            </div>
+                            <div class="trainer-text">
+                                <h5>Noah Leonard <span>- Trainer</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Trainer Section End -->
+{% endblock %}
+    <!-- Cta Section Begin -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cta-text">
+                        <h3>GeT Started Today</h3>
+                        <p>New student special! $30 unlimited Gym for the first week anh 50% of our member!</p>
+                    </div>
+                    <a href="#" class="primary-btn cta-btn">book now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Cta Section End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-logo-item">
+                        <div class="f-logo">
+                            <a href="#"><img src="/F/img/logo.png" alt=""></a>
+                        </div>
+                        <p>The struggles we endure today will be the 'good old days' we laugh about tomorrow .</p>
+                        <div class="social-links">
+                            <h6>Follow us</h6>
+							
+							<div class="share42init" data-url="https://athlon.tn/ }}" data-title="athlon.nom " ></div>
+                            
+							
+                  
+                        </div>
+						
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="footer-widget">
+                        <h5>Our Blog</h5>
+                        <div class="footer-blog">
+                            <a href="#" class="fb-item">
+                                <h6>Most people who work</h6>
+                                <span class="blog-time"><i class="fa fa-clock-o"></i> Jan 02, 2019</span>
+                            </a>
+                            <a href="#" class="fb-item">
+                                <h6> Achieve your dream physique </h6>
+                                <span class="blog-time"><i class="fa fa-clock-o"></i> Jan 02, 2019</span>
+                            </a>
+                            <a href="#" class="fb-item">
+                                <h6>become the best verison of yourself  </h6>
+                                <span class="blog-time"><i class="fa fa-clock-o"></i> Jan 02, 2019</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-widget">
+                        <h5>Program</h5>
+                        <ul class="workout-program">
+                            <li><a href="#">Bodybuilding</a></li>
+                            <li><a href="#">Running</a></li>
+                            <li><a href="#">Streching</a></li>
+                            <li><a href="#">Weight Loss</a></li>
+                            <li><a href="#">Gym Fitness</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="footer-widget">
+                        <h5>Get Info</h5>
+                        <ul class="footer-info">
+                            <li>
+                                <i class="fa fa-phone"></i>
+                                <span>Phone:</span>
+                                (12) 345 6789
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i>
+                                <span>Email:</span>
+                                athlon.info@gmail.com
+                            </li>
+                            <li>
+                                <i class="fa fa-map-marker"></i>
+                                <span>Address</span>
+                                Ariana, Box 283 8562, Tunis
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+
+
+                <div class="col-lg-12 text-center">
+                        <div class="ct-inside"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <a href="" target="_blank">Athlon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{{ asset('/F/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('/F/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('/F/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('/F/js/mixitup.min.js') }}"></script>
+    <script src="{{ asset('/F/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('/F/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('/F/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('/F/js/masonry.pkgd.min.js') }}"></script>
+    <script src="{{ asset('/F/js/main.js') }}"></script>
+	
+	<script src="{{ asset('/F/share42/share42.js') }}"></script>
+	
+</body>
+
 </html>

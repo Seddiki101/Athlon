@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exercice{% endblock %}
+
+{% block body %}
+    <style>
+        table {
+            margin-top: 50px;
+
+        }
+        h1 {
+            text-align: center;
+            margin-top: -80px;
+            margin-right: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            color: white;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 40px;
+        }
+
+        table {
+            margin-bottom: 80px;
+        }
+
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 60px;
+
+        }
+        .btn2 {
+            display: inline-block;
+            padding: 9px 80px;
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            margin: 4px 30px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        /* Button hover style */
+        .btn2:hover {
+            background-color: #0062cc;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button active style */
+        .btn2:active {
+            background-color: #005cbf;
+            box-shadow: none;
+        }
+
+        /* Button disabled style */
+        .btn2:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+
+
+
+
+
+
+
+
+
+    <section class="trainer-section spad">
+        <div class="wrapper">
+            <div class="container">
+
+                <div class="span9">
+                    <div class="content">
+                        <h1 style="color: white">Exercice</h1>
+                        <div class="centered-text">
+
+
+                            <table class="table">
+                                <tbody>
+                                <tr>
+                                    <th style="color: white">Nom</th>
+                                    <td style="color: white">{{ exercice.getNom() }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: white">Nom_cours</th>
+                                    <td style="color: white">{{ exercice.cours.nom }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: white">Duree_exercices</th>
+                                    <td style="color: white">{{ exercice.dureeExercices }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: white">Nombre_repetitions</th>
+                                    <td style="color: white">{{ exercice.nombreRepetitions }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: white">Desc_exercices</th>
+                                    <td style="color: white">{{ exercice.descExercices }}</td>
+                                </tr>
+                                <tr>
+                                    <th style="color: white">Machine</th>
+                                    <td style="color: white">{{ exercice.machine }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="btn-container">
+                                <a href="{{ path('app_ex_f_r') }}"><button class="btn2">Back</button></a></a>
+                            </div>
+
+
+                        </div><!--/.content-->
+                    </div><!--/.span9-->
+                </div>
+            </div><!--/.container-->
+        </div><!--/.wrapper-->
+    </section>
+{% endblock %}

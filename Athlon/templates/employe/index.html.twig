@@ -3,39 +3,25 @@
 {% block title %}Employe index{% endblock %}
 
 {% block body %}
-    <h1>Employe index</h1>
+    
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Cin</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Img_employe</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for employe in employes %}
-            <tr>
-                <td>{{ employe.id }}</td>
-                <td>{{ employe.cin }}</td>
-                <td>{{ employe.nom }}</td>
-                <td>{{ employe.prenom }}</td>
-                <td>{{ employe.imgEmploye }}</td>
-                <td>
-                    <a href="{{ path('app_employe_show', {'id': employe.id}) }}">show</a>
-                    <a href="{{ path('app_employe_edit', {'id': employe.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+ <section class="trainer-section spad">
+ <h1 class="text-center" style="color: white;">List Coachs</h1>
+  <br>
+  <div class="container">
+    <div class="row">
+             {% for employe in employes %}
 
-    <a href="{{ path('app_employe_new') }}">Create new</a>
+        <div class="col-md-4 mb-4">
+          <div class="employee-item">
+            <img src="{{ asset('media/' ~  employe.imgEmploye) }}" alt="{{ employe.nom }}'s photo" width="200" height="200" style="border-radius: 13%">
+            <h3 style="color: white;">COACH</h3>
+            <p class="employee-status" style="color:#E43434">{{  employe.etat  }}</p>
+            <a href="#" class="employee-link primary-btn" style="color:#E43434">{{ employe.prenom }} </a>
+          </div>
+        </div>
+      {% endfor %}    </div>
+  </div>
+</section>
+    
 {% endblock %}

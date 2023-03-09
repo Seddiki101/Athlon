@@ -1,8 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'base2.html.twig' %}
 
 {% block title %}Edit Conge{% endblock %}
 
 {% block body %}
+  <style>
+  .centered-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    position: absolute;
+    top: 41%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+   
+  }
+</style> 
+ <div class="centered-text">
+ 
+
+  <div class="container">
+        <div class="row">
+            <div class="col-md-1 offset-md-10">
     <h1>Edit Conge</h1>
 
     {{ include('conge/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,4 +29,8 @@
     <a href="{{ path('app_conge_index') }}">back to list</a>
 
     {{ include('conge/_delete_form.html.twig') }}
+      </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

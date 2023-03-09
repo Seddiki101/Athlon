@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Exercices index{% endblock %}
+
+{% block body %}
+    <style>
+        h1 {
+            text-align: center;
+            margin-top: -80px;
+            margin-right: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 5rem;
+            color: white;
+        }
+    </style>
+    <section class="trainer-section spad">
+        <h1 style="color: white;">List Exercices</h1>
+
+        <form class="d-flex align-items-center col-12 col-md-8 col-lg-3">
+        <span class="position-absolute pl-3 search-icon">
+            <i class="fe fe-search"></i>
+        </span>
+            <input type="search" id="myInput" class="form-control pl-6" placeholder="Search" />
+        </form>
+
+        <div class="container-fluid">
+            <div class="row" id="myTable">
+                {% for exercice in exercices %}
+                    <div class="col-md-4">
+                        <div class="feature-item set-bg">
+                            <td><img src="{{ asset('/media/' ~ exercice.getImageExercice()) }}?t={{ date().getTimestamp() }}" alt="exercice image" width="150" height="100"></td>
+
+                            <p style="color:#E43434"><br /> {{ exercice.nom }}</p>
+                            <a href="{{ path('app_exercices_details', {'id': exercice.id}) }}" class="btn btn-primary">View details</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable > .col-md-4").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

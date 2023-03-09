@@ -1,0 +1,40 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Stats Employe{% endblock %}
+
+{% block body %}
+  {% block javascripts %}
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="content">  
+          <style>
+            #myChart {
+              max-width: 400px;
+              margin: 0 auto;
+            }
+          </style>
+          <canvas id="myChart"></canvas>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <script>
+            new Chart(document.getElementById('myChart').getContext('2d'), {
+              type: 'pie',
+              data: {
+                labels: ['Salaire > 1000', 'Salaire <= 1000'],
+                datasets: [{
+                  backgroundColor: ['blue', 'red'],
+                  data: [{{ nbEmployeesWithSalaryGreaterThan1000 ?? 0 }}, {{ nbEmployeesWithSalaryLessOrEqual1000 ?? 0 }}]
+                }]
+              },
+              options: {}
+            });
+          </script>
+        </div><!--/.content-->
+      </div><!--/.col-md-6 offset-md-3-->
+    </div><!--/.row-->
+  </div><!--/.container-->
+</div><!--/.wrapper-->
+
+  {% endblock %}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="span9">
+                <div class="content">
+                    <div class="container">
+                    <div style="    display: flex;
+    justify-content: space-between;">
+        <a href="{{ path('app_commande_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
+        <form action="" method="get">
+            <input type="text" name="rechercheString" placeholder="recherche(statue)">
+            <button class="btn btn-dark" type="submit">Rechercher</button>
+        </form>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>user</th>
+            <th><a style="color: black"
+                   href="{{ path('app_commande_index_tri_date', {'tri':tri}) }}">date</a></th>
+            <th><a style="color: black"
+                   href="{{ path('app_commande_index_tri_statue', {'tri':tri}) }}">statue</a></th>
+            <th>action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td>{{ commande.user }}</td>
+                <td>{{ commande.date |date }}</td>
+                </td>
+                <td>{{ commande.statue }}</td>
+                <td>
+                    <form method="post" action="{{ path('app_commande_delete', {'idC': commande.idC}) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commande.idC) }}">
+                        <button class="btn btn-danger">delete</button>
+                    </form>
+                    <a class="btn btn-success" href="{{ path('app_commande_edit', {'idC': commande.idC}) }}">edit</a>
+                    <a class="btn btn-warning"
+                       href="{{ path('app_commande_item_index_commande', {'idC': commande.idC}) }}">items</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+                       </div><!--/.content-->
+                    </div><!--/.span9-->
+                </div>
+            </div><!--/.container-->
+        </div><!--/.wrapper-->
+
+
+        {% endblock %}

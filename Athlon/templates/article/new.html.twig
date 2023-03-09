@@ -3,12 +3,24 @@
 {% block title %}New Article{% endblock %}
 
 {% block body %}
+<style>
+  .centered-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
 
-	<div class="wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="span9">
-					<div class="content">	
+  }
+</style>
+<div class="centered-text">
+
+	<div class="container">
+        <div class="row">
+            <div class="col-md-1 offset-md-10">
 					
 					
     <h1>Create new Article</h1>
@@ -23,11 +35,11 @@
 	
 	
 	
-							</div><!--/.content-->
+							
 				</div><!--/.span9-->
 			</div>
 		</div><!--/.container-->
 	</div><!--/.wrapper-->
-	
+	</div>
 	
 {% endblock %}

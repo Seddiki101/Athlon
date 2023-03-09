@@ -1,0 +1,79 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+{% if is_granted('ROLE_ADMIN') %}
+
+    <h1>User index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Phone</th>
+                <th>Adres</th>
+                <th>Dateins</th>
+                <th>DateD</th>
+                <th>DateF</th>
+                <th>ImgUsr</th>
+                <th>IsVerified</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.adres }}</td>
+                <td>{{ user.dateins ? user.dateins|date('Y-m-d') : '' }}</td>
+                <td>{{ user.dateD ? user.dateD|date('Y-m-d') : '' }}</td>
+                <td>{{ user.dateF ? user.dateF|date('Y-m-d') : '' }}</td>
+                <td>{{ user.imgUsr }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_new') }}">Create new</a>
+	
+	
+	
+	
+	
+	
+	
+	
+	{% else %}
+
+
+	<h1> Login to see this page </h1>
+
+{% endif %}
+	
+	
+	
+	
+	
+{% endblock %}

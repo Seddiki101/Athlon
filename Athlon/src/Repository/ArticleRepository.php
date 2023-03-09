@@ -38,6 +38,44 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findByAuthor($author)
+{
+    return $this->createQueryBuilder('a')
+        ->andWhere('article.auteur = :author')
+        ->setParameter('author', $author)
+        ->orderBy('article.titre', 'ASC')
+        ->getQuery()
+        ->getResult();
+}
+public function getAuthorStats()
+{
+    $qb = $this->createQueryBuilder('article')
+        ->select('article.auteur, COUNT(article.id) as count')
+        ->groupBy('article.auteur')
+        ->orderBy('count', 'DESC')
+        ->setMaxResults(10);
+
+    return $qb->getQuery()->getResult();
+}
+public function findByTitle( $searchTerm)
+{
+    $query = $this->createQueryBuilder('a')
+        ->where('a.titre LIKE :searchTerm')
+        ->setParameter('searchTerm', '%'.$searchTerm.'%')
+        ->orderBy('a.titre', 'ASC')
+        ->getQuery();
+
+    return $query->getResult();
+}
+public function findByAuteur($auteur)
+{
+    return $this->createQueryBuilder('a')
+        ->where('a.auteur = :auteur')
+        ->setParameter('auteur', $auteur)
+        ->getQuery()
+        ->getResult()
+        ;
+}
 
 //    /**
 //     * @return Article[] Returns an array of Article objects
