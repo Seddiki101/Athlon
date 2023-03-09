@@ -77,6 +77,8 @@
                                         </form>
                                         <a class="btn btn-warning"
                                            href="{{ path('app_commande_item_index_commande_front', {'idC': commande.idC}) }}">items</a>
+                                        <a class="btn btn-warning"
+                                           href="{{ path('app_livraison_invoive', {'id': commande.idC}) }}">PDF</a>
                                     </div>
                                 </div>
                             </div>
@@ -84,13 +86,15 @@
                             <hr class="my-4"/>
 
                         {% endfor %}
+                        <div style="justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 24px;">{{ knp_pagination_render(commandes) }}</div>
+
                     </div>
                 </div>
 
-
             </div>
-
-        </div>
         </div>
     </section>
 {% endblock %}

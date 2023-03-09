@@ -3,40 +3,31 @@
 {% block title %}Hello CommandeController!{% endblock %}
 
 {% block body %}
-
-    <a href="{{ path('app_commande_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
-    <form class="d-flex align-items-center col-12 col-md-8 col-lg-3">
-               <span class="position-absolute pl-3 search-icon">
-                <i class="fe fe-search"></i>
-              </span>
-        <input type="search" id="myInput" class="form-control pl-6" placeholder="Search Commande"/>
-
-    </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            });
-        });
-    </script>
+    <div style="    display: flex;
+    justify-content: space-between;">
+        <a href="{{ path('app_commande_new', {'idC':app.request.get('idC')}) }}" class="btn btn-primary">ajout</a>
+        <form action="" method="get">
+            <input type="text" name="rechercheString" placeholder="recherche(statue)">
+            <button class="btn btn-dark" type="submit">Rechercher</button>
+        </form>
+    </div>
     <table class="table">
         <thead>
         <tr>
             <th>user</th>
-            <th>date</th>
-            <th>statue</th>
+            <th><a style="color: black"
+                   href="{{ path('app_commande_index_tri_date', {'tri':tri}) }}">date</a></th>
+            <th><a style="color: black"
+                   href="{{ path('app_commande_index_tri_statue', {'tri':tri}) }}">statue</a></th>
             <th>action</th>
         </tr>
         </thead>
-        <tbody id="myTable">
+        <tbody>
         {% for commande in commandes %}
             <tr>
                 <td>{{ commande.user }}</td>
-                <td>{{ commande.date  | date }}</td>
+                <td>{{ commande.date |date }}</td>
+                </td>
                 <td>{{ commande.statue }}</td>
                 <td>
                     <form method="post" action="{{ path('app_commande_delete', {'idC': commande.idC}) }}">
@@ -51,4 +42,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div style="justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 24px;">{{ knp_pagination_render(commandes) }}</div>
+
 {% endblock %}

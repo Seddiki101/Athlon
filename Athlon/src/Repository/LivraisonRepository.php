@@ -39,20 +39,27 @@ class LivraisonRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Livraison[] Returns an array of Livraison objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('l')
-//            ->andWhere('l.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('l.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+
+    public function recherche($value): array
+    {
+        $etat = null;
+        if ($value == 'non confimé') {
+            $etat = 0;
+        } else if ($value == 'confirmé') {
+            $etat = 1;
+        }
+        return $this->createQueryBuilder('l')
+            ->orWhere('l.email = :email')
+            ->orWhere('l.adresse = :adresse')
+            ->orWhere('l.confirmer = :etat')
+            ->setParameter('email', $value)
+            ->setParameter('adresse', $value)
+            ->setParameter('etat', $etat)
+            ->orderBy('l.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
 
 //    public function findOneBySomeField($value): ?Livraison
 //    {

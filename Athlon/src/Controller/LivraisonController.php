@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/livraison")
@@ -18,11 +19,110 @@ class LivraisonController extends AbstractController
     /**
      * @Route("/", name="app_livraison_index", methods={"GET"})
      */
-    public function index(LivraisonRepository $livraisonRepository): Response
+    public function index(Request $request, LivraisonRepository $livraisonRepository, PaginatorInterface $paginator): Response
     {
+        $rechercheString = $request->query->get('rechercheString');
+
+        if ($rechercheString == null) {
+            $results = $livraisonRepository->findAll(); // Remplacez "searchByTitle" par la méthode que vous utilisez pour rechercher les cours
+
+        } else {
+            $results = $livraisonRepository->recherche($rechercheString);
+        }
+
+        $pagination = $paginator->paginate(
+            $results, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
         return $this->render('livraison/livraisonBack.html.twig', [
-            'livraisons' => $livraisonRepository->findAll(),
+            'livraisons' => $pagination,
+            'tri' => 'ASC'
         ]);
+    }
+
+    #[Route('/triaddresse/{tri}', name: 'app_livraison_index_tri_adresse', methods: ['GET'])]
+    public function triadresse($tri, LivraisonRepository $livraisonRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $livraisons = $livraisonRepository->findBy(array(), array('adresse' => $tri));
+        if ($tri == 'DESC') {
+            $tri = 'ASC';
+        } else {
+            $tri = 'DESC';
+        }
+        $pagination = $paginator->paginate(
+            $livraisons, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('livraison/livraisonBack.html.twig', [
+            'livraisons' => $pagination,
+            'tri' => $tri
+        ]);
+
+    }
+
+    #[Route('/triEmail/{tri}', name: 'app_livraison_index_tri_email', methods: ['GET'])]
+    public function triEmail($tri, LivraisonRepository $livraisonRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $livraisons = $livraisonRepository->findBy(array(), array('email' => $tri));
+        if ($tri == 'DESC') {
+            $tri = 'ASC';
+        } else {
+            $tri = 'DESC';
+        }
+        $pagination = $paginator->paginate(
+            $livraisons, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('livraison/livraisonBack.html.twig', [
+            'livraisons' => $pagination,
+            'tri' => $tri
+        ]);
+
+    }
+
+    #[Route('/triDate/{tri}', name: 'app_livraison_index_tri_date', methods: ['GET'])]
+    public function triDate($tri, LivraisonRepository $livraisonRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $livraisons = $livraisonRepository->findBy(array(), array('date' => $tri));
+        if ($tri == 'DESC') {
+            $tri = 'ASC';
+        } else {
+            $tri = 'DESC';
+        }
+        $pagination = $paginator->paginate(
+            $livraisons, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('livraison/livraisonBack.html.twig', [
+            'livraisons' => $pagination,
+            'tri' => $tri
+        ]);
+
+    }
+
+    #[Route('/triEtat/{tri}', name: 'app_livraison_index_tri_etat', methods: ['GET'])]
+    public function triEtat($tri, LivraisonRepository $livraisonRepository, PaginatorInterface $paginator, Request $request): Response
+    {
+        $livraisons = $livraisonRepository->findBy(array(), array('confirmer' => $tri));
+        if ($tri == 'DESC') {
+            $tri = 'ASC';
+        } else {
+            $tri = 'DESC';
+        }
+        $pagination = $paginator->paginate(
+            $livraisons, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            2 /*limit per page*/
+        );
+        return $this->render('livraison/livraisonBack.html.twig', [
+            'livraisons' => $pagination,
+            'tri' => $tri
+        ]);
+
     }
 
     /**

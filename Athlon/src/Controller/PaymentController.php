@@ -28,7 +28,7 @@ class PaymentController extends AbstractController
     public function checkout(Request $request): Response
     {
 
-        Stripe::setApiKey('sk_test_51HnVLcL83IQ8H8DrwhPGzj69I35Pj4kT5Ha3L0OiU2V3Rq3yatCybhyndI09PRuezGocFKvQPTjSE0TbmxTpxKKJ00duZqdBmt');
+        Stripe::setApiKey('sk_test_51MhKLdGY9S3rG4mj8P7eGVlhU0cDcbWhEHP5oXwHIJ8daklUYUB1EvpCYg15esYjI2ZKf9ZiKTHHyTHqPNmMnTBr00ktQnjhji');
 
         $session = Session::create([
             'payment_method_types' => ['card'],

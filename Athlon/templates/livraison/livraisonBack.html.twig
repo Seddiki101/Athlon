@@ -2,17 +2,25 @@
 
 {% block title %}Hello CommandeController!{% endblock %}
 {% block body %}
-    <a href="{{ path('app_livraison_new_back') }}" class="btn btn-primary">ajout</a>
-
+    <div style="    display: flex;
+    justify-content: space-between;">
+        <a href="{{ path('app_livraison_new_back') }}" class="btn btn-primary">ajout</a>
+        <form action="{{ path('app_livraison_index') }}" method="get">
+            <input type="text" name="rechercheString" placeholder="recherche(email, adresse, etat)">
+            <button class="btn btn-dark" type="submit">Rechercher</button>
+        </form>
+    </div>
     <table class="table">
         <thead>
         <tr>
-            <td>addresse</td>
-            <td>email</td>
+            <td><a style="color: black" href="{{ path('app_livraison_index_tri_adresse', {'tri':tri}) }}">addresse</a>
+            </td>
+
+            <td><a style="color: black" href="{{ path('app_livraison_index_tri_email', {'tri':tri}) }}">email</a></td>
             <th>user</th>
-            <th>date</th>
+            <th><a style="color: black" href="{{ path('app_livraison_index_tri_date', {'tri':tri}) }}">date</a></th>
             <th>commande</th>
-            <th>etat</th>
+            <th><a style="color: black" href="{{ path('app_livraison_index_tri_etat', {'tri':tri}) }}">etat</a></th>
             <th>action</th>
         </tr>
         </thead>
@@ -45,6 +53,12 @@
                 </td>
             </tr>
         {% endfor %}
+
         </tbody>
     </table>
+    <div style="justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 24px;">{{ knp_pagination_render(livraisons) }}</div>
+
 {% endblock %}

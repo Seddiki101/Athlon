@@ -64,7 +64,7 @@ class LivraisonControllerMobile extends AbstractController
     }
 
     /**
-     * @Route("/new/{idC}", name="app_livraison_new", methods={"GET", "POST"})
+     * @Route("/new/{idC}", name="app_livraison_new_mobile", methods={"GET", "POST"})
      */
     public function new($idC, Request $request, \App\Repository\LivraisonRepository $livraisonRepository, \App\Repository\CommandeRepository $commandeRepository): Response
     {
