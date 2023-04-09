@@ -19,7 +19,6 @@ public class uzer {
     
     private String nom;
     private String prenom;
-    private String imgUsr;
     private Date dateins;
 
     public int getId() {
@@ -63,13 +62,6 @@ public class uzer {
         this.prenom = prenom;
     }
 
-    public String getImgUsr() {
-        return imgUsr;
-    }
-
-    public void setImgUsr(String imgUsr) {
-        this.imgUsr = imgUsr;
-    }
 
     public Date getDateins() {
         return dateins;

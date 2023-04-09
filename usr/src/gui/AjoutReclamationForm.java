@@ -54,10 +54,6 @@ public class AjoutReclamationForm extends BaseForm {
         getContentPane().setScrollVisible(false);
         
         
-        tb.addSearchCommand(e ->  {
-            
-        });
-        
         Tabs swipe = new Tabs();
         
         Label s1 = new Label();
@@ -106,23 +102,17 @@ public class AjoutReclamationForm extends BaseForm {
         add(LayeredLayout.encloseIn(swipe, radioContainer));
 
         ButtonGroup barGroup = new ButtonGroup();
-        RadioButton mesListes = RadioButton.createToggle("Mes Reclamations", barGroup);
+        RadioButton mesListes = RadioButton.createToggle("Ajouter reclamation ", barGroup);
         mesListes.setUIID("SelectBar");
-        RadioButton liste = RadioButton.createToggle("Autres", barGroup);
+        RadioButton liste = RadioButton.createToggle("- ", barGroup);
         liste.setUIID("SelectBar");
-        RadioButton partage = RadioButton.createToggle("Reclamer", barGroup);
+        RadioButton partage = RadioButton.createToggle("liste", barGroup);
         partage.setUIID("SelectBar");
         Label arrow = new Label(res.getImage("news-tab-down-arrow.png"), "Container");
 
 
-        mesListes.addActionListener((e) -> {
-               InfiniteProgress ip = new InfiniteProgress();
-        final Dialog ipDlg = ip.showInifiniteBlocking();
-        
-        //  ListReclamationForm a = new ListReclamationForm(res);
-          //  a.show();
-            refreshTheme();
-        });
+        mesListes.addActionListener((e) -> new AjoutReclamationForm(res).show());
+        partage.addActionListener((e) -> new ListReclamationForm(res).show());
 
         add(LayeredLayout.encloseIn(
                 GridLayout.encloseIn(3, mesListes, liste, partage),
@@ -178,7 +168,7 @@ public class AjoutReclamationForm extends BaseForm {
                     
                     
                     //njibo iduser men session (current user)
-                    //
+                    // 99 is uses as placeholder for user id
                     Reclamation r = new Reclamation(
                             99,
                             objet.getText().toString(),

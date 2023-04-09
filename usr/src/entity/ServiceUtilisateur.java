@@ -21,6 +21,7 @@ import gui.WalkthruForm;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Vector;
+import util.PwdHasher;
 
 /**
  *
@@ -54,9 +55,11 @@ public class ServiceUtilisateur {
     //Signup
     public void signup(TextField firstName,TextField lastName,TextField Email ,TextField Password, Resources res  ) {
         
-     
+                    //hashing
+                    String pew;
+                    pew = PwdHasher.hashPassword(Password.getText());
         
-        String url = Statics.BASE_URL+"/addUserJSON/new?nom="+firstName.getText().toString()+"&prenom="+lastName.getText().toString() +"&email="+Email.getText().toString()+"&password="+Password.getText().toString();
+        String url = Statics.BASE_URL+"/addUserJSON/new?nom="+firstName.getText().toString()+"&prenom="+lastName.getText().toString() +"&email="+Email.getText().toString()+"&password="+pew;
         
         req.setUrl(url);
        

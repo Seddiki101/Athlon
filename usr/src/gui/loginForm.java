@@ -46,8 +46,7 @@ public class loginForm extends BaseForm {
         Button signIn = new Button("Sign In");
         Button signUp = new Button("Sign Up");
         
-        //mp oublié
-        Button  mp = new Button("oublier mot de passe?","CenterLabel");
+
         
         
         signUp.addActionListener(e -> new SignUpForm(res).show());
@@ -65,7 +64,7 @@ public class loginForm extends BaseForm {
                 new FloatingHint(Password),
                 createLineSeparator(),
                 signIn,
-                FlowLayout.encloseCenter(doneHaveAnAccount, signUp),mp
+                FlowLayout.encloseCenter(doneHaveAnAccount, signUp)
         );
         content.setScrollableY(true);
         add(BorderLayout.SOUTH, content);

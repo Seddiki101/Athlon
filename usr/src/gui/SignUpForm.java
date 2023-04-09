@@ -35,6 +35,8 @@ import com.codename1.ui.util.Resources;
 import entity.ServiceUtilisateur;
 import java.util.Vector;
 
+import util.PwdHasher;
+
 /**
  * Signup UI
  *
@@ -76,6 +78,7 @@ public class SignUpForm extends BaseForm {
         Password.setConstraint(TextField.PASSWORD);
         
         Button next = new Button("SignUp");
+        
         Button signIn = new Button("Sign In");
         signIn.addActionListener(e -> new loginForm(res).show());
         signIn.setUIID("Link");
@@ -104,6 +107,7 @@ public class SignUpForm extends BaseForm {
         ));
         next.requestFocus();
         next.addActionListener((e) -> {
+            
             
             ServiceUtilisateur.getInstance().signup(UserName, UserLname, Email, Password, res);
             Dialog.show("Success","account is saved","OK",null);
